@@ -110,7 +110,7 @@ class RestDatasourceGet {
 
   //VACCINS
   Future getAllVaccinsByDog({int id}) async {
-    String url = baseurl + "vaccin/$id";
+    String url = baseurl + "medical/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},

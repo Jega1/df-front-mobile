@@ -78,13 +78,19 @@ class _UserEditState extends State<UserEdit> {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
                       int id = SharedPrefData().userId;
-                      await RestDatasourceP().editUser(
-                          id: id,
-                          email: emailCtl.text,
-                          username: usernameCtl.text,
-                          password: passwordCtl.text,
-                          address_cabinet: " ",
-                          code_postal: " ");
+                      await RestDatasourceP()
+                          .editUser(
+                              id: id,
+                              email: emailCtl.text,
+                              username: usernameCtl.text,
+                              password: passwordCtl.text,
+                              address_cabinet: " ",
+                              code_postal: " ")
+                          .whenComplete(() {
+                        Navigator.pop(
+                          context,
+                        );
+                      });
                     }
                   },
                   child: Text("register"),

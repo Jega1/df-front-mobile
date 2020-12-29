@@ -1,6 +1,7 @@
 import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/main.dart';
+import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/vaccin.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -13,17 +14,23 @@ class AddVaccin extends StatefulWidget {
 
 class _AddVaccinState extends State<AddVaccin> {
   final _formKey = GlobalKey<FormState>();
-  VaccinModel vaccinModel = VaccinModel();
+  //VaccinModel vaccinModel = VaccinModel();
+  MedicalModel medicalModel = MedicalModel();
   final requiredValidator =
       RequiredValidator(errorText: 'This field is required');
 
-  TextEditingController dateVaccinCtl = TextEditingController();
+  // TextEditingController dateVaccinCtl = TextEditingController();
+  // TextEditingController nextDateCtl = TextEditingController();
+  // TextEditingController addVaccinCtl = TextEditingController();
+  // TextEditingController observationCtl = TextEditingController();
+  TextEditingController nameCtl = TextEditingController();
+  TextEditingController firstDateCtl = TextEditingController();
   TextEditingController nextDateCtl = TextEditingController();
-  TextEditingController addVaccinCtl = TextEditingController();
   TextEditingController observationCtl = TextEditingController();
 
   DateTime now = DateTime.now();
   List<VaccinModel> vaccins = [];
+  List<MedicalModel> medicals = [];
   bool isLoading = false;
 
   String selectedVaccin = '';
@@ -127,7 +134,7 @@ class _AddVaccinState extends State<AddVaccin> {
                                 Border.all(width: 1.0, color: Colors.grey[400]),
                           ),
                           child: Text(
-                            dateVaccinCtl.text,
+                            firstDateCtl.text,
                             style: TextStyle(
                               fontSize: 18,
                             ),
@@ -212,14 +219,15 @@ class _AddVaccinState extends State<AddVaccin> {
                       padding: EdgeInsets.only(
                           left: 50, top: 10, right: 50, bottom: 10),
                       onPressed: () async {
-                        vaccinModel.idDog = currentDog.idDog;
-                        vaccinModel.nameVaccin = selectedVaccin;
-                        vaccinModel.dateVaccin = dateVaccinCtl.text;
-                        vaccinModel.nextDate = nextDateCtl.text;
-                        vaccinModel.observation = observationCtl.text;
+                        medicalModel.idDog = currentDog.idDog;
+                        medicalModel.name = selectedVaccin;
+                        medicalModel.firstDate = firstDateCtl.text;
+                        medicalModel.nextDate = nextDateCtl.text;
+                        medicalModel.observation = observationCtl.text;
+                        medicalModel.typeMedical = 1;
                         await RestDatasourceP()
                             .vaccinRegisterApi(
-                          vaccinModel: vaccinModel,
+                          medicalModel: medicalModel,
                         )
                             .then((onValue) {
                           Navigator.pop(
@@ -266,7 +274,7 @@ class _AddVaccinState extends State<AddVaccin> {
             "${now.month.toString().padLeft(2, '0')}/"
             "${now.year.toString()}   ";
 
-        dateVaccinCtl.text = convertedDate;
+        firstDateCtl.text = convertedDate;
       });
     }
   }
@@ -311,13 +319,13 @@ class _AddVaccinState extends State<AddVaccin> {
               children: <Widget>[
                 Expanded(
                   child: TextField(
-                    controller: addVaccinCtl,
+                    controller: nameCtl,
                   ),
                 ),
                 FlatButton(
                   onPressed: () {
                     setState(() {
-                      selectedVaccin = addVaccinCtl.text;
+                      selectedVaccin = nameCtl.text;
                     });
                     Navigator.pop(context);
                   },
@@ -334,7 +342,7 @@ class _AddVaccinState extends State<AddVaccin> {
                       title: Text(e.nameVaccin),
                       onTap: () {
                         setState(() {
-                          addVaccinCtl.text = e.nameVaccin;
+                          nameCtl.text = e.nameVaccin;
                         });
                       },
                     ))
@@ -358,6 +366,5 @@ class _AddVaccinState extends State<AddVaccin> {
         isLoading = false;
       });
     }
-    // _selectedMotive = motifs[0];
   }
 }

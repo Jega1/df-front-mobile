@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AddController extends StatefulWidget {
+class AddVaccinController extends StatefulWidget {
   @override
-  _AddControllerState createState() => _AddControllerState();
+  _AddVaccinControllerState createState() => _AddVaccinControllerState();
 }
 
-class _AddControllerState extends State<AddController> {
+class _AddVaccinControllerState extends State<AddVaccinController> {
   @override
   Widget build(BuildContext context) {
     return Container();

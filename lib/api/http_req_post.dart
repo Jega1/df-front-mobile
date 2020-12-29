@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/models/dog.dart';
+import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/user.dart';
-import 'package:dog_face/models/vaccin.dart';
+
 import 'package:http/http.dart' as http;
 
 String baseurl = "http://10.0.2.2:8000/api/";
@@ -63,10 +64,10 @@ class RestDatasourceP {
   }
 
   ///Vaccin
-  Future vaccinRegisterApi({VaccinModel vaccinModel}) async {
-    String url = baseurl + "vaccin/register";
+  Future vaccinRegisterApi({MedicalModel medicalModel}) async {
+    String url = baseurl + "medical/add-medical";
     http.Response response = await http.post(url,
-        body: jsonEncode(vaccinModel.toJson()),
+        body: jsonEncode(medicalModel.toJson()),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});
     Map res = jsonDecode(response.body);
     print(res);
