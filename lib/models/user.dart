@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'dart:ffi';
+
 List<UserModel> UserModelFromJson(String str) =>
     List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
 
@@ -14,6 +16,8 @@ class UserModel {
   String password;
   String addressCabinet;
   String code_postal;
+  String ville;
+  Double logitude;
 
   UserModel(
       {this.idUser,
@@ -22,7 +26,8 @@ class UserModel {
       this.code_postal,
       this.email,
       this.password,
-      this.username});
+      this.username,
+      this.ville});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         idUser: json["id_user"],
@@ -32,6 +37,7 @@ class UserModel {
         password: json["password"],
         addressCabinet: json["addressCabinet"],
         code_postal: json["code_postal"],
+        ville: json["ville"],
       );
   Map<String, dynamic> toJson() => {
         "id_user": idUser,

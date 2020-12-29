@@ -9,10 +9,11 @@ import 'package:flutter/material.dart';
 //Color primaryColor = const Color(0xFFF92B7F);MIXED WITH ABOVE
 //Color primaryColor = const Color(0xFFF5B0B35);MY PROJECT COLOR
 //ILIGHT MARRON
-Color primaryColor = const Color(0xFFc0133f); //c0133f
-Color secondColor = const Color(0xFF00077B);
+Color primaryColor = const Color(0xFFB10933); //c0133f, 5b0b35
+Color secondColor = const Color(0xFF074596);
 Color pinkLight = const Color(0xffEDE4EF);
 Color pinkDark = const Color(0xFFF58524);
+//Color amberLight = const Color(0xFFedb256);//edb256
 Color darkRed = const Color(0xff8B0000);
 Color red = const Color(0xff8B0000);
 Color brightRed = const Color(0xfff08080);

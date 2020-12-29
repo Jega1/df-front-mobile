@@ -41,6 +41,9 @@ class _Wellcome2ScreenState extends State<Wellcome2Screen> {
                       bottomRight: const Radius.circular(30),
                     ),
                     gradient: LinearGradient(colors: [
+                      //Color.fromRGBO(87, 114, 114, .9),
+                      // Color.fromRGBO(91, 11, 53, .9),
+                      //Color.fromRGBO(192, 19, 63, .9),
                       Color.fromRGBO(192, 19, 63, .9),
                       Color.fromRGBO(0, 0, 153, .9),
                     ])),
@@ -109,7 +112,6 @@ class _Wellcome2ScreenState extends State<Wellcome2Screen> {
                     _buildPasswordRow(),
                     _buildForgetPasswordButton(),
                     _buildLoginButton(),
-                    //  _builOrRow(),
                     _buildSingupBtn(),
                   ]),
             ),
@@ -258,11 +260,11 @@ class _Wellcome2ScreenState extends State<Wellcome2Screen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Column(
-          children: [
+          children: [f
             ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                height: MediaQuery.of(context).size.height*0.1,
+                height: gMediaQuery.of(context).size.height*0.1,
                 width: MediaQuery.of(context).size.width*0.7,
                 decoration: BoxDecoration(
                    boxShadow: [

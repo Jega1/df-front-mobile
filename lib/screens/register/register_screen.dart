@@ -20,8 +20,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String dropdownValue = 'Veterinaire';
   List<String> _typeUser = ['Veterinaire', 'Properietaire'];
   String _selectedUser;
-  // List<String> _sex = ['Veterinaire', 'Proprietaire'];
-  // String _selectedSex;
 
   final _formKey = GlobalKey<FormState>();
   UserModel userModel = UserModel();
@@ -32,8 +30,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          //title: Text('Register'),
-          ),
+        title: Text('Inscription'),
+      ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -53,30 +51,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     overflow: TextOverflow.fade,
                   ),
                 ),
-
-                // DropdownButton<String>(
-                //   value: dropdownValue,
-                //   icon: Icon(Icons.arrow_downward),
-                //   iconSize: 24,
-                //   elevation: 16,
-                //   style: TextStyle(color: Colors.deepPurple),
-                //   underline: Container(
-                //     height: 2,
-                //     color: Colors.deepPurpleAccent,
-                //   ),
-                //   onChanged: (String newValue) {
-                //     setState(() {
-                //       dropdownValue = newValue;
-                //     });
-                //   },
-                //   items: <String>['Properietaire', 'Veterinaire']
-                //       .map<DropdownMenuItem<String>>((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                // ),
 
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -134,7 +108,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    //  validator: requiredValidator,
                     validator: EmailValidator(errorText: "format not valide"),
                     onSaved: (val) {
                       userModel.email = val;
@@ -223,26 +196,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             _formKey.currentState.save();
                             print(userModel.email);
                             Map res = await RestDatasourceP().userRegisterApi(
-                              isVet: dropdownValue == 'Veterinaire' ? 1 : 0,
+                              isVet: _selectedUser == 'Veterinaire' ? 1 : 0,
                               userModel: userModel,
                             );
-                            if (res["status"]) {
+                            if (res["success"]) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Wellcome2Screen(),
+                                ),
+                              );
                               buildShowDialog(
                                   context: context,
-                                  title: "Connectez - vous",
+                                  title: "Votre demande bien enregistre",
                                   func: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Wellcome2Screen(),
-                                      ),
-                                    );
+                                    Navigator.pop(context);
                                   });
                             } else {
                               buildShowDialog(
                                   context: context,
-                                  title: "User already exists",
-                                  func: () {});
+                                  title: res["message"],
+                                  func: () {
+                                    Navigator.pop(context);
+                                  });
                             }
                           }
                         },

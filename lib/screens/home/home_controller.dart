@@ -70,12 +70,27 @@ authUser({
             ],
           ),
         );
+      } else {
+        SharedPrefData().setApprovedAuth(val: 1);
+        Navigator.pop(context);
+        val["data"]["user"]["0"]["is_veterinay"] == "1"
+            ? Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VetDashboard(),
+                ))
+            : Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UserDashboard(),
+                ));
       }
     } else {
+      print("i am here");
       buildShowDialog(
           context: context,
           func: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
           },
           title: val["message"]);
     }
