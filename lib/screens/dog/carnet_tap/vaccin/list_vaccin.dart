@@ -2,11 +2,10 @@ import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/vaccin.dart';
+import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/vaccin/add_vaccin.dart';
 import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/vaccin/edit_vaccin.dart';
 import 'package:flutter/material.dart';
 import 'package:dog_face/api/http_req_get.dart';
-
-import 'add_vaccin.dart';
 
 class ListVaccin extends StatefulWidget {
   @override

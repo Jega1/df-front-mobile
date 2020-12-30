@@ -1,5 +1,8 @@
+import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/api/http_req_post.dart';
+import 'package:dog_face/appColors.dart';
 import 'package:dog_face/datas/sharedPref.dart';
+import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -9,6 +12,8 @@ class UserEdit extends StatefulWidget {
 }
 
 class _UserEditState extends State<UserEdit> {
+  bool isLoading = false;
+
   TextEditingController usernameCtl = TextEditingController();
   TextEditingController emailCtl = TextEditingController();
   TextEditingController passwordCtl = TextEditingController();
@@ -29,79 +34,114 @@ class _UserEditState extends State<UserEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('edit user')),
+        appBar: AppBar(title: Text('Modifier votre profil')),
         body: Form(
           key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'username',
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 20.0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0))),
-                  controller: usernameCtl,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                    padding: EdgeInsets.all(20),
+                    child: CircleAvatar(
+                      minRadius: 30,
+                      maxRadius: 55,
+                      child: Text('AH'),
+                      // backgroundImage: NetworkImage(
+                      //     'https://www.woolha.com/media/2020/03/eevee.png'),
+                    )),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'username',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    controller: usernameCtl,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  validator: EmailValidator(errorText: "format not valide"),
-                  decoration: InputDecoration(
-                      labelText: 'email',
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 20.0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0))),
-                  controller: emailCtl,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    validator: EmailValidator(errorText: "format not valide"),
+                    decoration: InputDecoration(
+                        labelText: 'email',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    controller: emailCtl,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'password',
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 20.0),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0))),
-                  controller: passwordCtl,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FlatButton(
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      int id = SharedPrefData().userId;
-                      await RestDatasourceP()
-                          .editUser(
+
+                //PASSWORD
+
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: TextFormField(
+                //     decoration: InputDecoration(
+                //         labelText: 'password',
+                //         contentPadding: new EdgeInsets.symmetric(
+                //             vertical: 20.0, horizontal: 20.0),
+                //         border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(5.0))),
+                //     controller: passwordCtl,
+                //   ),
+                // ),
+
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FlatButton(
+                      padding: EdgeInsets.only(top: 15, bottom: 15),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          int id = SharedPrefData().userId;
+                          await RestDatasourceP().editUser(
                               id: id,
                               email: emailCtl.text,
                               username: usernameCtl.text,
                               password: passwordCtl.text,
                               address_cabinet: " ",
-                              code_postal: " ")
-                          .whenComplete(() {
-                        Navigator.pop(
-                          context,
-                        );
-                      });
-                    }
-                  },
-                  child: Text("register"),
-                ),
-              )
-            ],
+                              code_postal: " ");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserDashboard(),
+                            ),
+                          );
+                        }
+                      },
+                      child: Text(
+                        "Enregistrer",
+                        style: TextStyle(fontSize: 25, color: white),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }
 
-  void getData() {
+  void getData() async {
     //username , email
+    setState(() {
+      isLoading = true;
+    });
+    //  Map res = await RestDatasourceGet().getUserById();
+
+    setState(() {
+      isLoading = false;
+    });
   }
 }

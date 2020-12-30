@@ -1,9 +1,6 @@
 import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/screens/home/finger.dart';
-import 'package:dog_face/screens/home/fingerAuth.dart';
-import 'package:dog_face/screens/home/home_screen.dart';
-
-import 'package:dog_face/screens/home/wellcome2_screen.dart';
+import 'package:dog_face/screens/login/login_screen.dart';
 import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_dash.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +43,7 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Wellcome2Screen(),
+              builder: (context) => LoginScreen(),
             ));
       }
     });

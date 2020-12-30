@@ -1,7 +1,6 @@
 import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/models/user.dart';
-import 'package:dog_face/screens/home/home_screen.dart';
-import 'package:dog_face/screens/home/wellcome2_screen.dart';
+import 'package:dog_face/screens/login/login_screen.dart';
 import 'package:dog_face/widget/alertDialog.dart';
 
 import 'package:flutter/material.dart';
@@ -203,7 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Wellcome2Screen(),
+                                  builder: (context) => LoginScreen(),
                                 ),
                               );
                               buildShowDialog(

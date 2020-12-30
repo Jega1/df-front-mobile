@@ -1,9 +1,7 @@
 import 'package:dog_face/appColors.dart';
 import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/models/user.dart';
-import 'package:dog_face/screens/home/wellcome2_screen.dart';
-import 'package:dog_face/screens/home/wellcome_screen.dart';
-import 'package:dog_face/screens/register/register_screen.dart';
+import 'package:dog_face/screens/login/login_screen.dart';
 import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_dash.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,7 @@ class FingerAuthPage extends StatefulWidget {
 }
 
 class _FingerAuthPageState extends State<FingerAuthPage> {
-   final LocalAuthentication auth = LocalAuthentication();
+  final LocalAuthentication auth = LocalAuthentication();
   UserModel userModel = UserModel();
   final requiredValidator =
       RequiredValidator(errorText: 'This field is required');
@@ -56,8 +54,10 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [_logo(),
-              connect(),],
+              children: [
+                _logo(),
+                connect(),
+              ],
             )
           ],
         ),
@@ -85,9 +85,6 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
     );
   }
 
-  
-
-
   Widget connect() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -97,51 +94,60 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                height: MediaQuery.of(context).size.height*0.1,
-                width: MediaQuery.of(context).size.width*0.7,
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.7,
                 decoration: BoxDecoration(
-                   boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(17, 191, 255, .9),
-                           // blurRadius: 10.0,
-                           // offset: Offset(0, 10)
-                           )
-                      ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(17, 191, 255, .9),
+                      // blurRadius: 10.0,
+                      // offset: Offset(0, 10)
+                    )
+                  ],
                   color: Colors.white,
                 ),
                 child: RaisedButton(
                   elevation: 5.0,
                   onPressed: () {
-                 Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Wellcome2Screen(),
-                        ),
-                      );},
-                  child: Text('Se connecter', style: TextStyle(fontSize: 20, color: Colors.black,  fontFamily: "Arial",),),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Se connecter',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontFamily: "Arial",
+                    ),
+                  ),
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: ClipRRect(
-
                 borderRadius: BorderRadius.circular(90),
                 child: GestureDetector(
-                 onTap: () {
-                  _authenticate();
-                },              child: Container(
+                  onTap: () {
+                    _authenticate();
+                  },
+                  child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        //  Color.fromRGBO(0,	92,	63, .9),
-                        Color.fromRGBO(122,	12,	40, .9),
-                       // Color.fromRGBO(	255,	99,	97,  .9),
-                        Color.fromRGBO(	2,	24,	101,.9),
-                      ])
-
+                        gradient: LinearGradient(colors: [
+                      //  Color.fromRGBO(0,	92,	63, .9),
+                      Color.fromRGBO(122, 12, 40, .9),
+                      // Color.fromRGBO(	255,	99,	97,  .9),
+                      Color.fromRGBO(2, 24, 101, .9),
+                    ])),
+                    child: Icon(
+                      Icons.fingerprint,
+                      size: 70,
+                      color: Colors.white,
                     ),
-                    child:  Icon(Icons.fingerprint, size: 70, color: Colors.white,),
                   ),
                 ),
               ),
@@ -152,12 +158,10 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
     );
   }
 
-
-  Widget _forgetPassword(){
+  Widget _forgetPassword() {
     return Container(
         height: MediaQuery.of(context).size.height / 15,
         width: MediaQuery.of(context).size.width / 2,
-
         child: new Text("Mot de passe oublié ?",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -167,22 +171,18 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
                 fontSize: 20)));
   }
 
-    Widget _register(){
+  Widget _register() {
     return Container(
-      
         height: MediaQuery.of(context).size.height / 15,
         width: MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-                   gradient: LinearGradient(colors: [
+            gradient: LinearGradient(colors: [
               //  Color.fromRGBO(0,	92,	63, .9),
-                      Color.fromRGBO(122,	12,	40, .9),
-                     // Color.fromRGBO(	255,	99,	97,  .9),
-                      Color.fromRGBO(	2,	24,	101,.9),
-                    ])
-
-                  ),
-
+              Color.fromRGBO(122, 12, 40, .9),
+              // Color.fromRGBO(	255,	99,	97,  .9),
+              Color.fromRGBO(2, 24, 101, .9),
+            ])),
         child: new Text('Inscrivez - vous',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -191,9 +191,8 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
                 fontFamily: "Arial",
                 fontSize: 20)));
   }
-  
 
-navigatePage() {
+  navigatePage() {
     if (SharedPrefData().isVet == "1") {
       Navigator.push(
           context,
@@ -206,12 +205,11 @@ navigatePage() {
           MaterialPageRoute(
             builder: (context) => UserDashboard(),
           ));
-    };
+    }
+    ;
   }
 
-
-
- Future<void> _authenticate() async {
+  Future<void> _authenticate() async {
     bool authenticated = false;
     try {
       await auth
@@ -236,6 +234,4 @@ navigatePage() {
       // _authorized = message;
     });
   }
-
-  
 }

@@ -19,10 +19,6 @@ class _AddVaccinState extends State<AddVaccin> {
   final requiredValidator =
       RequiredValidator(errorText: 'This field is required');
 
-  // TextEditingController dateVaccinCtl = TextEditingController();
-  // TextEditingController nextDateCtl = TextEditingController();
-  // TextEditingController addVaccinCtl = TextEditingController();
-  // TextEditingController observationCtl = TextEditingController();
   TextEditingController nameCtl = TextEditingController();
   TextEditingController firstDateCtl = TextEditingController();
   TextEditingController nextDateCtl = TextEditingController();

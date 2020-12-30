@@ -1,5 +1,6 @@
 import 'package:dog_face/datas/sharedPref.dart';
-import 'package:dog_face/screens/home/home_screen.dart';
+import 'package:dog_face/screens/home/finger.dart';
+import 'package:dog_face/screens/login/login_screen.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_appointments.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_edit.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _VetDashboardScreenState extends State<VetDashboardScreen> {
                   SharedPrefData().reset();
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => Home()),
+                      MaterialPageRoute(builder: (context) => FingerAuthPage()),
                       (Route<dynamic> route) => false);
                 },
                 child: Row(

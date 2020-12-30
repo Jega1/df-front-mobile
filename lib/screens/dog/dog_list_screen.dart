@@ -3,6 +3,7 @@ import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/dog.dart';
 import 'package:flutter/material.dart';
+import '../../appColors.dart';
 import 'doc_activity/memo/notification.dart';
 import 'doc_activity/profil/dog_info.dart';
 import 'dog_add_screen.dart';
@@ -68,7 +69,7 @@ class _DogListScreenState extends State<DogListScreen> {
           });
         },
         child: Icon(Icons.add),
-        //  backgroundColor: primaryColor,
+        backgroundColor: primaryColor,
       ),
     );
   }

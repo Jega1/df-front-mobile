@@ -25,6 +25,7 @@ class RestDatasourceP {
         "password": userModel.password,
         "address_cabinet": userModel.addressCabinet,
         "code_postal": userModel.code_postal,
+        "ville": userModel.ville,
         "is_veterinay": "1"
       };
     } else {
@@ -48,6 +49,35 @@ class RestDatasourceP {
     http.Response response = await http.post(url,
         body: jsonEncode(data),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+    return res;
+  }
+
+//EDIT user
+
+  Future editUser(
+      {int id,
+      String username,
+      String email,
+      String password,
+      String address_cabinet,
+      String code_postal,
+      String ville}) async {
+    String url = baseurl + "user/$id";
+    http.Response response = await http.put(
+      url,
+      body: jsonEncode({
+        "username": username,
+        "email": email,
+        "password": password,
+        "is_veterinay": SharedPrefData().isVet,
+        "address_cabinet": address_cabinet,
+        "code_postal": code_postal,
+        "ville": ville,
+      }),
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+    );
     Map res = jsonDecode(response.body);
     print(res);
     return res;
@@ -93,28 +123,30 @@ class RestDatasourceP {
     print(res);
   }
 
-  Future editUser(
-      {int id,
-      String username,
-      String email,
-      String password,
-      String address_cabinet,
-      String code_postal}) async {
-    String url = baseurl + "user/$id";
-    http.Response response = await http.put(
-      url,
-      body: jsonEncode({
-        "username": username,
-        "email": email,
-        "password": password,
-        "is_veterinay": SharedPrefData().isVet,
-        "address_cabinet": address_cabinet,
-        "code_postal": code_postal
-      }),
-      headers: {HttpHeaders.contentTypeHeader: "application/json"},
-    );
-    Map res = jsonDecode(response.body);
-    print(res);
-    return res;
-  }
+  // Future editUser(
+  //     {int id,
+  //     String username,
+  //     String email,
+  //     String password,
+  //     String address_cabinet,
+  //     String code_postal,
+  //     String ville}) async {
+  //   String url = baseurl + "user/$id";
+  //   http.Response response = await http.put(
+  //     url,
+  //     body: jsonEncode({
+  //       "username": username,
+  //       "email": email,
+  //       "password": password,
+  //       "is_veterinay": SharedPrefData().isVet,
+  //       "address_cabinet": address_cabinet,
+  //       "code_postal": code_postal,
+  //       "ville": ville,
+  //     }),
+  //     headers: {HttpHeaders.contentTypeHeader: "application/json"},
+  //   );
+  //   Map res = jsonDecode(response.body);
+  //   print(res);
+  //   return res;
+  // }
 }
