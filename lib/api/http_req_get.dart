@@ -5,8 +5,19 @@ import 'package:http/http.dart' as http;
 String baseurl = "http://10.0.2.2:8000/api/";
 
 class RestDatasourceGet {
-  Future getVetById({int id}) async {
+  Future getUserById({int id}) async {
     String url = baseurl + "user/$id";
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+    );
+    Map res = jsonDecode(response.body);
+    print(res);
+    return res;
+  }
+
+  Future getVetById({int id}) async {
+    String url = baseurl + "user/vet/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
@@ -93,18 +104,22 @@ class RestDatasourceGet {
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
     );
     Map res = jsonDecode(response.body);
+    print('jrrrffffdthrrrrrr');
     print(res);
+    print('jrrrrrrdddddrrr');
     return res;
   }
 
   Future getAppointsByVet({int id}) async {
-    String url = baseurl + "appoint/$id";
+    String url = baseurl + "appoint/24";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
     );
     Map res = jsonDecode(response.body);
+    print('jrrrrrrrrr');
     print(res);
+    print('jrrrrrrrrr');
     return res;
   }
 
@@ -116,7 +131,9 @@ class RestDatasourceGet {
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
     );
     Map res = jsonDecode(response.body);
+
     print(res);
+
     return res;
   }
 

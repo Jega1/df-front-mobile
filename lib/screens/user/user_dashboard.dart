@@ -136,7 +136,7 @@ class _UserDashboardState extends State<UserDashboard> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        //   backgroundColor: secondColor,
+        backgroundColor: secondColor,
         currentIndex: 0, // this will be set when a new tab is tapped
         onTap: (int index) {
           if (index == 0) {

@@ -17,7 +17,7 @@ class _UserEditState extends State<UserEdit> {
   TextEditingController usernameCtl = TextEditingController();
   TextEditingController emailCtl = TextEditingController();
   TextEditingController passwordCtl = TextEditingController();
-  TextEditingController adressCtl = TextEditingController();
+  TextEditingController addressCtl = TextEditingController();
   TextEditingController codePostalCtl = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -104,20 +104,24 @@ class _UserEditState extends State<UserEdit> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           _formKey.currentState.save();
-                          int id = SharedPrefData().userId;
-                          await RestDatasourceP().editUser(
-                              id: id,
-                              email: emailCtl.text,
-                              username: usernameCtl.text,
-                              password: passwordCtl.text,
-                              address_cabinet: " ",
-                              code_postal: " ");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UserDashboard(),
-                            ),
-                          );
+                          // int id = SharedPrefData().userId;
+                          await RestDatasourceP()
+                              .editUser(
+                                  id: SharedPrefData().userId,
+                                  email: emailCtl.text,
+                                  username: usernameCtl.text,
+                                  password: passwordCtl.text,
+                                  address_cabinet: " ",
+                                  code_postal: " ",
+                                  ville: " ")
+                              .whenComplete(() {
+                            SharedPrefData()
+                                .setUsername(value: usernameCtl.text);
+                            SharedPrefData().setEmail(value: emailCtl.text);
+                            SharedPrefData()
+                                .setPassword(value: passwordCtl.text);
+                            Navigator.pop(context);
+                          });
                         }
                       },
                       child: Text(
@@ -138,7 +142,11 @@ class _UserEditState extends State<UserEdit> {
     setState(() {
       isLoading = true;
     });
-    //  Map res = await RestDatasourceGet().getUserById();
+    Map res =
+        await RestDatasourceGet().getUserById(id: SharedPrefData().userId);
+
+    addressCtl.text = res["message"][0]["address_cabinet"];
+    codePostalCtl.text = res["message"][0]["code_postal"];
 
     setState(() {
       isLoading = false;

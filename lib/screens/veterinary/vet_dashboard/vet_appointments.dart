@@ -1,6 +1,5 @@
 import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/datas/sharedPref.dart';
-
 import 'package:flutter/material.dart';
 
 class AppointVetScreen extends StatefulWidget {
@@ -10,7 +9,7 @@ class AppointVetScreen extends StatefulWidget {
 
 class _AppointVetScreenState extends State<AppointVetScreen> {
   bool isLoading = false;
-  List allVetConsult = [];
+  List allAppointOfVet = [];
 
   @override
   void initState() {
@@ -28,20 +27,21 @@ class _AppointVetScreenState extends State<AppointVetScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : allVetConsult.length == 0
+          : allAppointOfVet.length == 0
               ? Center(
-                  child: Text("No rdv here"),
+                  child: Text("No rdvdddd here"),
                 )
               : ListView.builder(
-                  itemCount: allVetConsult.length,
+                  itemCount: allAppointOfVet.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {},
                       child: ListTile(
-                        title: Text(allVetConsult[index]["id_user"].toString()),
+                        title:
+                            Text(allAppointOfVet[index]["id_user"].toString()),
                         leading: Icon(Icons.local_hospital),
                         trailing:
-                            Text(allVetConsult[index]["motif"].toString()),
+                            Text(allAppointOfVet[index]["motif"].toString()),
                       ),
                     );
                   }),
@@ -56,10 +56,11 @@ class _AppointVetScreenState extends State<AppointVetScreen> {
         .getAppointsByVet(id: SharedPrefData().userId)
         .then((val) {
       Map res = val;
-      allVetConsult = res["data"];
-    });
-    setState(() {
-      isLoading = false;
+      allAppointOfVet = res["data"];
+      print(res);
+      setState(() {
+        isLoading = false;
+      });
     });
   }
 }

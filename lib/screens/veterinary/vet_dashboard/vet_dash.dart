@@ -1,8 +1,10 @@
 import 'package:dog_face/datas/sharedPref.dart';
+import 'package:dog_face/screens/appoint/list_consult.dart';
 import 'package:dog_face/screens/home/finger.dart';
-import 'package:dog_face/screens/login/login_screen.dart';
+
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_appointments.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_edit.dart';
+import 'package:dog_face/screens/veterinary/vet_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class VetDashboard extends StatefulWidget {
@@ -42,6 +44,31 @@ class _VetDashboardScreenState extends State<VetDashboardScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0, // this will be set when a new tab is tapped
+        onTap: (int index) {
+          if (index == 0) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AppointVetScreen(),
+                ));
+          } else {
+            index == 1
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VetListScreen(),
+                    ),
+                  )
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppointListScreen(),
+                    ),
+                  );
+          }
+          ;
+        },
+
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.add_alarm),
