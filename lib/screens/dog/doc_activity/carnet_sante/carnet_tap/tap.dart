@@ -1,7 +1,5 @@
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/maladie/maladie.dart';
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/sick/add_sick.dart';
 import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/sick/list_sick.dart';
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/vaccin/add_vaccin.dart';
+
 import 'package:flutter/material.dart';
 
 import 'vaccin/list_vaccin.dart';
