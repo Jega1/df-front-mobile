@@ -17,7 +17,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   String dropdownValue = 'Veterinaire';
-  List<String> _typeUser = ['Veterinaire', 'Properietaire'];
+  List<String> _typeUser = ['Veterinaire', 'Properietaire, Eleveur'];
   String _selectedUser;
 
   final _formKey = GlobalKey<FormState>();
@@ -29,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inscription'),
+        title: Text('Sign Up'),
       ),
       body: Form(
         key: _formKey,
@@ -141,40 +141,106 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: _selectedUser == "Veterinaire"
-                      ? TextFormField(
-                          validator: requiredValidator,
-                          onSaved: (val) {
-                            userModel.addressCabinet = val;
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'adresse',
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 20.0),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0))),
-                          //controller: ,
-                        )
-                      : SizedBox.shrink(),
+                  child: TextFormField(
+                    onSaved: (val) {
+                      userModel.telephone = val;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'telephone',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    //controller: ,
+                  ),
                 ),
 
-                _selectedUser == "Veterinaire"
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          validator: requiredValidator,
-                          onSaved: (val) {
-                            userModel.code_postal = val;
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'code postal',
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 20.0),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0))),
-                        ),
-                      )
-                    : SizedBox.shrink(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    validator: requiredValidator,
+                    onSaved: (val) {
+                      userModel.address = val;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'Address',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    //controller: ,
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    validator: requiredValidator,
+                    onSaved: (val) {
+                      userModel.codePostal = val;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'code postal',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    //controller: ,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    validator: requiredValidator,
+                    onSaved: (val) {
+                      userModel.ville = val;
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'ville',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    //controller: ,
+                  ),
+                ),
+
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: _selectedUser == "Veterinaire"
+                //       ? TextFormField(
+                //           validator: requiredValidator,
+                //           onSaved: (val) {
+                //             userModel.addressCabinet = val;
+                //           },
+                //           decoration: InputDecoration(
+                //               labelText: 'adresse',
+                //               contentPadding: new EdgeInsets.symmetric(
+                //                   vertical: 20.0, horizontal: 20.0),
+                //               border: OutlineInputBorder(
+                //                   borderRadius: BorderRadius.circular(5.0))),
+                //           //controller: ,
+                //         )
+                //       : SizedBox.shrink(),
+                // ),
+
+                // _selectedUser == "Veterinaire"
+                //     ? Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: TextFormField(
+                //           validator: requiredValidator,
+                //           onSaved: (val) {
+                //             userModel.code_postal = val;
+                //           },
+                //           decoration: InputDecoration(
+                //               labelText: 'code postal',
+                //               contentPadding: new EdgeInsets.symmetric(
+                //                   vertical: 20.0, horizontal: 20.0),
+                //               border: OutlineInputBorder(
+                //                   borderRadius: BorderRadius.circular(5.0))),
+                //         ),
+                //       )
+                //     : SizedBox.shrink(),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -182,10 +248,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10),
-                      // gradient: LinearGradient(colors: [
-                      //   Color.fromRGBO(192, 19, 63, .9),
-                      //   Color.fromRGBO(0, 0, 153, .9),
-                      // ]),
                     ),
                     child: FlatButton(
                         padding: EdgeInsets.only(
@@ -207,7 +269,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               );
                               buildShowDialog(
                                   context: context,
-                                  title: "Votre demande bien enregistre",
+                                  title:
+                                      "Votre demande bien enregistre connectez -vous",
                                   func: () {
                                     Navigator.pop(context);
                                   });
@@ -222,7 +285,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                         child: new Text(
-                          "Inscription",
+                          "Créer un compte",
                           style: TextStyle(
                               fontSize: 20, fontFamily: "Arial", color: white),
                         )),

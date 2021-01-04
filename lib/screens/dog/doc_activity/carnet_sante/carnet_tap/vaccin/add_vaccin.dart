@@ -189,10 +189,6 @@ class _AddVaccinState extends State<AddVaccin> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
-                  //  validator: requiredValidator,
-                  // onSaved: (val) {
-                  //   dogModel.birthCertificateNu = val;
-                  // },
                   decoration: InputDecoration(
                       labelText: "Observation",
                       border: OutlineInputBorder(
@@ -222,7 +218,7 @@ class _AddVaccinState extends State<AddVaccin> {
                         medicalModel.observation = observationCtl.text;
                         medicalModel.typeMedical = 1;
                         await RestDatasourceP()
-                            .vaccinRegisterApi(
+                            .medicalRegisterApi(
                           medicalModel: medicalModel,
                         )
                             .then((onValue) {

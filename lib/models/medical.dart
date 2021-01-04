@@ -33,7 +33,7 @@ class MedicalModel {
         firstDate: json["first_date"],
         nextDate: json["next_date"],
         observation: json["observation"],
-        treatment: json["treatement"],
+        treatment: json["treatment"],
         typeMedical: 0,
       );
   Map<String, dynamic> toJson() => {
@@ -43,7 +43,7 @@ class MedicalModel {
         "firstDate": firstDate,
         "next_date": nextDate,
         "observation": observation,
-        "treatment": observation,
+        "treatment": treatment,
         "typeMedical": typeMedical
       };
 }

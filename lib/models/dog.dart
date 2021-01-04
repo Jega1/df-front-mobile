@@ -15,7 +15,7 @@ class DogModel {
   String sex;
   String race;
   String puceNu;
-  String convertedDate;
+  //String convertedDate;
   String birthCertificateNu;
   String birthDate;
   String passportNu;
@@ -29,7 +29,7 @@ class DogModel {
       this.race,
       this.puceNu,
       this.birthDate,
-      this.convertedDate,
+      //this.convertedDate,
       this.birthCertificateNu,
       this.passportNu,
       this.img});
@@ -41,7 +41,7 @@ class DogModel {
         sex: json["sex"],
         race: json["race"],
         puceNu: json["puce_nu"],
-        convertedDate: json["birthDate"],
+        //   convertedDate: json["birthDate"],
         birthDate: json["birth_date"],
         birthCertificateNu: json["birthCertificateNu"],
         passportNu: json["passportNu"],
@@ -52,7 +52,7 @@ class DogModel {
         "sex": sex,
         "race": race,
         "puceNu": puceNu,
-        "birthDate": convertedDate,
+        //  "birthDate": convertedDate,
         "birth_date": birthDate,
         "birthCertificateNu": birthCertificateNu,
         "passportNu": passportNu,

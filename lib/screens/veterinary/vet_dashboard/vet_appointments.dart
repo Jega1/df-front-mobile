@@ -53,7 +53,7 @@ class _AppointVetScreenState extends State<AppointVetScreen> {
       isLoading = true;
     });
     await RestDatasourceGet()
-        .getAppointsByVet(id: SharedPrefData().userId)
+        .getAppointsByVet(id: SharedPrefData().vetId)
         .then((val) {
       Map res = val;
       allAppointOfVet = res["data"];

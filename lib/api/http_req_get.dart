@@ -51,7 +51,7 @@ class RestDatasourceGet {
   }
 
   Future getDogsByUser({int id}) async {
-    String url = baseurl + "dog/$id";
+    String url = baseurl + "dog/user/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
@@ -111,7 +111,7 @@ class RestDatasourceGet {
   }
 
   Future getAppointsByVet({int id}) async {
-    String url = baseurl + "appoint/24";
+    String url = baseurl + "appoint/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
@@ -125,15 +125,13 @@ class RestDatasourceGet {
 
   //VACCINS
   Future getAllVaccinsByDog({int id}) async {
-    String url = baseurl + "medical/$id";
+    String url = baseurl + "medical/vaccin/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
     );
     Map res = jsonDecode(response.body);
-
     print(res);
-
     return res;
   }
 

@@ -144,8 +144,8 @@ class _VetEditState extends State<VetEdit> {
                                     email: emailCtl.text,
                                     username: usernameCtl.text,
                                     password: passwordCtl.text,
-                                    address_cabinet: addressCtl.text,
-                                    code_postal: codePostalCtl.text,
+                                    address: addressCtl.text,
+                                    codePostal: codePostalCtl.text,
                                     ville: villeCtl.text)
                                 .whenComplete(() {
                               SharedPrefData()
@@ -174,8 +174,8 @@ class _VetEditState extends State<VetEdit> {
       isLoading = true;
     });
     Map res = await RestDatasourceGet().getVetById(id: SharedPrefData().userId);
-    addressCtl.text = res["message"][0]["address_cabinet"];
-    codePostalCtl.text = res["message"][0]["code_postal"];
+    addressCtl.text = res["message"][0]["address"];
+    codePostalCtl.text = res["message"][0]["codePostal"];
     villeCtl.text = res["message"][0]["ville"];
 
     setState(() {

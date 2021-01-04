@@ -12,6 +12,8 @@ String baseurl = "http://10.0.2.2:8000/api/";
 
 class RestDatasourceP {
 //USER
+
+/*
   userRegisterApi({
     int isVet,
     UserModel userModel,
@@ -43,6 +45,35 @@ class RestDatasourceP {
     return res;
   }
 
+
+*/
+
+  userRegisterApi({
+    int isVet,
+    UserModel userModel,
+  }) async {
+    String url = baseurl + "user/register";
+    Map data = {};
+
+    data = {
+      "username": userModel.username,
+      "email": userModel.email,
+      "password": userModel.password,
+      "address": userModel.address,
+      "codePostal": userModel.codePostal,
+      "ville": userModel.ville,
+      "telephone": userModel.telephone,
+      "longitude": userModel.longitude,
+      "latitude": userModel.latitude,
+      "is_veterinay": userModel.isVet,
+    };
+    http.Response response = await http.post(url,
+        body: jsonEncode(data),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    return res;
+  }
+
   Future userAuthenticate({String email, String password}) async {
     String url = baseurl + "user/authenticate";
     Map data = {"email": email, "password": password};
@@ -56,28 +87,36 @@ class RestDatasourceP {
 
 //EDIT user
 
-  Future editUser(
-      {int id,
-      String username,
-      String email,
-      String password,
-      String address_cabinet,
-      String code_postal,
-      String ville}) async {
+  Future editUser({
+    int id,
+    String username,
+    String email,
+    String password,
+    String address,
+    String codePostal,
+    String ville,
+    String telephone,
+  }) async {
     String url = baseurl + "user/$id";
-    http.Response response = await http.put(
-      url,
-      body: jsonEncode({
-        "username": username,
-        "email": email,
-        "password": password,
-        "is_veterinay": SharedPrefData().isVet,
-        "address_cabinet": address_cabinet,
-        "code_postal": code_postal,
-        "ville": ville,
-      }),
-      headers: {HttpHeaders.contentTypeHeader: "application/json"},
-    );
+    http.Response response;
+    try {
+      response = await http.put(
+        url,
+        body: jsonEncode({
+          "username": username,
+          "email": email,
+          "password": password,
+          "is_veterinay": SharedPrefData().isVet,
+          "address": address,
+          "codePostal": codePostal,
+          "ville": ville,
+          "telephone": telephone,
+        }),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"},
+      );
+    } catch (e) {
+      print(e);
+    }
     Map res = jsonDecode(response.body);
     print(res);
     return res;
@@ -94,7 +133,7 @@ class RestDatasourceP {
   }
 
   ///Vaccin
-  Future vaccinRegisterApi({MedicalModel medicalModel}) async {
+  Future medicalRegisterApi({MedicalModel medicalModel}) async {
     String url = baseurl + "medical/add-medical";
     http.Response response = await http.post(url,
         body: jsonEncode(medicalModel.toJson()),
@@ -123,7 +162,7 @@ class RestDatasourceP {
     print(res);
   }
 
-  // Future editUser(
+  // Future editUsereeeeeee(
   //     {int id,
   //     String username,
   //     String email,

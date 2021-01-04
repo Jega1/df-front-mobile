@@ -33,6 +33,13 @@ class _UserDashboardState extends State<UserDashboard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      CircleAvatar(
+                        minRadius: 30,
+                        maxRadius: 55,
+                        // child: Text('AH'),
+                        backgroundImage: NetworkImage(
+                            'https://www.woolha.com/media/2020/03/eevee.png'),
+                      ),
                       Text(
                         "Vous avez 1 chien",
                         style: TextStyle(color: secondColor, fontSize: 20),
@@ -136,7 +143,7 @@ class _UserDashboardState extends State<UserDashboard> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: secondColor,
+        backgroundColor: lightGrey,
         currentIndex: 0, // this will be set when a new tab is tapped
         onTap: (int index) {
           if (index == 0) {
@@ -165,34 +172,34 @@ class _UserDashboardState extends State<UserDashboard> {
           BottomNavigationBarItem(
             icon: new Icon(
               Icons.cloud_queue,
-              color: primaryColor,
+              color: lightBlack,
               size: 40,
             ),
             title: new Text(
               'Mes chiens',
-              style: TextStyle(color: primaryColor, fontSize: 20),
+              style: TextStyle(color: lightBlack, fontSize: 20),
             ),
           ),
           BottomNavigationBarItem(
             icon: new Icon(
               Icons.local_hospital,
-              color: primaryColor,
+              color: lightBlack,
               size: 40,
             ),
             title: new Text(
               'Mes vetos',
-              style: TextStyle(color: primaryColor, fontSize: 20),
+              style: TextStyle(color: lightBlack, fontSize: 20),
             ),
           ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                color: primaryColor,
+                color: lightBlack,
                 size: 40,
               ),
               title: Text(
                 'Mes rdv',
-                style: TextStyle(color: primaryColor, fontSize: 20),
+                style: TextStyle(color: lightBlack, fontSize: 20),
               ))
         ],
       ),

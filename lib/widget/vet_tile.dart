@@ -35,11 +35,11 @@ class VetListTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    userModel.addressCabinet,
+                    userModel.address,
                     style: TextStyle(fontSize: 14, color: Colors.grey[800]),
                   ),
                   Text(
-                    userModel.code_postal,
+                    userModel.codePostal,
                     style: TextStyle(fontSize: 14, color: Colors.grey[800]),
                   ),
                   // Text(

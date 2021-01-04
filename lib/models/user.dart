@@ -14,20 +14,25 @@ class UserModel {
   String username;
   String email;
   String password;
-  String addressCabinet;
-  String code_postal;
+  String address;
+  String codePostal;
   String ville;
-  Double logitude;
+  Double longitude;
+  Double latitude;
+  String telephone;
 
   UserModel(
       {this.idUser,
       this.isVet,
-      this.addressCabinet,
-      this.code_postal,
+      this.address,
+      this.codePostal,
       this.email,
       this.password,
       this.username,
-      this.ville});
+      this.ville,
+      this.longitude,
+      this.latitude,
+      this.telephone});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         idUser: json["id_user"],
@@ -35,9 +40,12 @@ class UserModel {
         username: json["username"],
         email: json["email"],
         password: json["password"],
-        addressCabinet: json["addressCabinet"],
-        code_postal: json["code_postal"],
+        address: json["address"],
+        codePostal: json["codePostal"],
         ville: json["ville"],
+        telephone: json["telephone"],
+        longitude: json["longitude"],
+        latitude: json["latitude"],
       );
   Map<String, dynamic> toJson() => {
         "id_user": idUser,
@@ -45,7 +53,10 @@ class UserModel {
         "username": username,
         "email": email,
         "password": password,
-        "addressCabinet": addressCabinet,
-        "code_postal": code_postal,
+        "address": address,
+        "codePostal": codePostal,
+        "telephone": telephone,
+        "longitude": longitude,
+        "latitude": latitude,
       };
 }

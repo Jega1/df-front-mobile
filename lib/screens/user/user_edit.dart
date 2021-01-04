@@ -2,6 +2,7 @@ import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/appColors.dart';
 import 'package:dog_face/datas/sharedPref.dart';
+import 'package:dog_face/models/user.dart';
 import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -13,12 +14,14 @@ class UserEdit extends StatefulWidget {
 
 class _UserEditState extends State<UserEdit> {
   bool isLoading = false;
-
+  List<UserModel> users = [];
   TextEditingController usernameCtl = TextEditingController();
   TextEditingController emailCtl = TextEditingController();
   TextEditingController passwordCtl = TextEditingController();
   TextEditingController addressCtl = TextEditingController();
   TextEditingController codePostalCtl = TextEditingController();
+  TextEditingController villeCtl = TextEditingController();
+  TextEditingController telephoneCtl = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -76,6 +79,20 @@ class _UserEditState extends State<UserEdit> {
                   ),
                 ),
 
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    validator: EmailValidator(errorText: "format not valide"),
+                    decoration: InputDecoration(
+                        labelText: 'Telephone',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    controller: telephoneCtl,
+                  ),
+                ),
+
                 //PASSWORD
 
                 // Padding(
@@ -92,6 +109,43 @@ class _UserEditState extends State<UserEdit> {
                 // ),
 
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'address cabinet',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    controller: addressCtl,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'code postal',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    controller: codePostalCtl,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'ville',
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                    controller: villeCtl,
+                  ),
+                ),
+
+                Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Container(
                     width: double.infinity,
@@ -105,23 +159,18 @@ class _UserEditState extends State<UserEdit> {
                         if (_formKey.currentState.validate()) {
                           _formKey.currentState.save();
                           // int id = SharedPrefData().userId;
-                          await RestDatasourceP()
-                              .editUser(
-                                  id: SharedPrefData().userId,
-                                  email: emailCtl.text,
-                                  username: usernameCtl.text,
-                                  password: passwordCtl.text,
-                                  address_cabinet: " ",
-                                  code_postal: " ",
-                                  ville: " ")
-                              .whenComplete(() {
-                            SharedPrefData()
-                                .setUsername(value: usernameCtl.text);
-                            SharedPrefData().setEmail(value: emailCtl.text);
-                            SharedPrefData()
-                                .setPassword(value: passwordCtl.text);
-                            Navigator.pop(context);
-                          });
+                          SharedPrefData().setUsername(value: usernameCtl.text);
+                          SharedPrefData().setEmail(value: emailCtl.text);
+                          SharedPrefData().setPassword(value: passwordCtl.text);
+                          Map res = await RestDatasourceP().editUser(
+                              id: SharedPrefData().userId,
+                              email: emailCtl.text,
+                              username: usernameCtl.text,
+                              password: passwordCtl.text,
+                              address: addressCtl.text,
+                              codePostal: codePostalCtl.text,
+                              ville: villeCtl.text,
+                              telephone: telephoneCtl.text);
                         }
                       },
                       child: Text(
@@ -145,8 +194,10 @@ class _UserEditState extends State<UserEdit> {
     Map res =
         await RestDatasourceGet().getUserById(id: SharedPrefData().userId);
 
-    addressCtl.text = res["message"][0]["address_cabinet"];
+    addressCtl.text = res["message"][0]["address"];
     codePostalCtl.text = res["message"][0]["code_postal"];
+    villeCtl.text = res["message"][0]["ville"];
+    telephoneCtl.text = res["message"][0]["telephone"];
 
     setState(() {
       isLoading = false;

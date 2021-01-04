@@ -11,7 +11,7 @@ class DogAddScreen extends StatefulWidget {
 }
 
 class _DogAddScreenState extends State<DogAddScreen> {
-  TextEditingController vaccinDateCtl = TextEditingController();
+  TextEditingController birthDateCtl = TextEditingController();
   DateTime now = DateTime.now();
   final _formKey = GlobalKey<FormState>();
   DogModel dogModel = DogModel();
@@ -47,7 +47,7 @@ class _DogAddScreenState extends State<DogAddScreen> {
             "${now.month.toString().padLeft(2, '0')}/"
             "${now.year.toString()}   ";
 
-        // vaccinDateCtl.text = convertedDate;
+        birthDateCtl.text = convertedDate;
       });
     }
   }
@@ -232,8 +232,9 @@ class _DogAddScreenState extends State<DogAddScreen> {
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             _formKey.currentState.save();
-                            dogModel.convertedDate = convertedDate.trim();
+                            dogModel.birthDate = birthDateCtl.text;
                             dogModel.sex = _selectedSex;
+                            //      id_user= SharedPrefData().userId
                             print(dogModel.lastname);
                             RestDatasourceP().dogRegisterApi(
                               dogModel: dogModel,
