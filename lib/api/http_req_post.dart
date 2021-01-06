@@ -54,6 +54,7 @@ class RestDatasourceP {
   }) async {
     String url = baseurl + "user/register";
     Map data = {};
+    print(isVet);
 
     data = {
       "username": userModel.username,
@@ -65,7 +66,7 @@ class RestDatasourceP {
       "telephone": userModel.telephone,
       "longitude": userModel.longitude,
       "latitude": userModel.latitude,
-      "is_veterinay": userModel.isVet,
+      "is_veterinary": userModel.isVeterinary
     };
     http.Response response = await http.post(url,
         body: jsonEncode(data),

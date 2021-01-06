@@ -1,26 +1,25 @@
-import 'dart:convert';
-
-List<PackageModel> PackageModelFromJson(String str) => List<PackageModel>.from(
-    json.decode(str).map((x) => PackageModel.fromJson(x)));
-
-String PackageModelToJson(List<PackageModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class PackageModel {
   int idPackage;
+  String namePackage;
   String description;
+  String idStatus;
 
-  PackageModel({
-    this.idPackage,
-    this.description,
-  });
+  PackageModel(
+      {this.idPackage, this.namePackage, this.description, this.idStatus});
 
-  factory PackageModel.fromJson(Map<String, dynamic> json) => PackageModel(
-        idPackage: json["id_package"],
-        description: json["description"],
-      );
-  Map<String, dynamic> toJson() => {
-        "id_package": idPackage,
-        "description": description,
-      };
+  PackageModel.fromJson(Map<String, dynamic> json) {
+    idPackage = json['id_package'];
+    namePackage = json['name_package'];
+    description = json['description'];
+    idStatus = json['id_status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id_package'] = this.idPackage;
+    data['name_package'] = this.namePackage;
+    data['description'] = this.description;
+    data['id_status'] = this.idStatus;
+    return data;
+  }
 }

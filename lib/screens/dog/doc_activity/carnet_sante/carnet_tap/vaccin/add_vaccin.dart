@@ -3,9 +3,11 @@ import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/vaccin.dart';
+import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/vaccin/list_vaccin.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../../../../../../appColors.dart';
+import '../tap.dart';
 
 class AddVaccin extends StatefulWidget {
   @override
@@ -222,9 +224,8 @@ class _AddVaccinState extends State<AddVaccin> {
                           medicalModel: medicalModel,
                         )
                             .then((onValue) {
-                          Navigator.pop(
-                            context,
-                          );
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => TapScreen()));
                         });
                       },
                       child: new Text(

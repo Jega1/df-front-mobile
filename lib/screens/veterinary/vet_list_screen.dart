@@ -42,13 +42,13 @@ class _VetListScreenState extends State<VetListScreen> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => VetAvailable(
-                                id_vet: allvet[index]["id_vet"],
+                                idVet: allvet[index]["id_user"],
                                 name: allvet[index]["username"])));
                       },
                       child: ListTile(
                         title: Text(allvet[index]["username"]),
                         leading: Icon(Icons.local_hospital),
-                        trailing: Text(allvet[index]["address_cabinet"]),
+                        trailing: Text(allvet[index]["address"]),
                       ),
                     );
                   }),

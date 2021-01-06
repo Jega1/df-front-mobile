@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-List<MedicalModel> MedicalModelFromJson(String str) => List<MedicalModel>.from(
+List<MedicalModel> medicalModelFromJson(String str) => List<MedicalModel>.from(
     json.decode(str).map((x) => MedicalModel.fromJson(x)));
 
-String VaccinModelToJson(List<MedicalModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+// String VaccinModelToJson(List<MedicalModel> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MedicalModel {
   int idMedical;
@@ -12,8 +12,8 @@ class MedicalModel {
   String name;
   String firstDate;
   String nextDate;
-  String observation;
   String treatment;
+  String observation;
   int typeMedical;
 
   MedicalModel(
@@ -22,28 +22,31 @@ class MedicalModel {
       this.name,
       this.firstDate,
       this.nextDate,
-      this.observation,
       this.treatment,
+      this.observation,
       this.typeMedical});
 
-  factory MedicalModel.fromJson(Map<String, dynamic> json) => MedicalModel(
-        idMedical: json["id_medical"],
-        idDog: json["id_dog"],
-        name: json["name"],
-        firstDate: json["first_date"],
-        nextDate: json["next_date"],
-        observation: json["observation"],
-        treatment: json["treatment"],
-        typeMedical: 0,
-      );
-  Map<String, dynamic> toJson() => {
-        "id_medical": idMedical,
-        "id_dog": idDog,
-        "name": name,
-        "firstDate": firstDate,
-        "next_date": nextDate,
-        "observation": observation,
-        "treatment": treatment,
-        "typeMedical": typeMedical
-      };
+  MedicalModel.fromJson(Map<String, dynamic> json) {
+    idMedical = json['id_medical'];
+    idDog = json['id_dog'];
+    name = json['name'];
+    firstDate = json['first_date'];
+    nextDate = json['next_date'];
+    treatment = json['treatment'];
+    observation = json['observation'];
+    typeMedical = json['type_medical'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id_medical'] = this.idMedical;
+    data['id_dog'] = this.idDog;
+    data['name'] = this.name;
+    data['first_date'] = this.firstDate;
+    data['next_date'] = this.nextDate;
+    data['treatment'] = this.treatment;
+    data['observation'] = this.observation;
+    data['type_medical'] = this.typeMedical;
+    return data;
+  }
 }

@@ -22,6 +22,9 @@ authUser({
       //    SharedPrefData().setUsername(value: userModel.username);
       SharedPrefData()
           .setIsVet(value: val["data"]["user"]["0"]["is_veterinay"]);
+      userModel = UserModel.fromJson(val['data']['user']['0']);
+      print('USER MODEL');
+      print(userModel.toJson());
     }
     if (val["success"]) {
       int isApproved = SharedPrefData().getApprovedAuth();
@@ -53,7 +56,7 @@ authUser({
                 onPressed: () {
                   SharedPrefData().setApprovedAuth(val: 0);
                   Navigator.pop(context);
-                  val["data"]["user"]["0"]["is_veterinay"] == "1"
+                  val["data"]["user"]["0"]["is_veterinary"] == "1"
                       ? Navigator.push(
                           context,
                           MaterialPageRoute(

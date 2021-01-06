@@ -6,6 +6,7 @@ import 'package:dog_face/widget/menuDrawer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../appColors.dart';
+import 'documents/doc.dart';
 import 'documents/doc_tap.dart';
 
 class DogInfoScreen extends StatefulWidget {
@@ -28,20 +29,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
             onPressed: () {
               Navigator.pop(context);
             }),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              if (_scaffoldKey.currentState.isDrawerOpen) {
-                _scaffoldKey.currentState.openEndDrawer();
-              } else {
-                _scaffoldKey.currentState.openEndDrawer();
-              }
-            },
-          ),
-        ],
       ),
-      endDrawer: MenuDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -60,8 +48,10 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (_) => EditDog()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => EditDog(
+                                dogModel: currentDog,
+                              )));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,6 +86,40 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
           ],
         ),
       ),
+
+      // body: Stack(
+      //   children: <Widget>[
+      //     Positioned.fill(
+      //         child: Column(
+      //       children: [
+      //         Expanded(
+      //           child: Container(
+      //             color: Colors.blueGrey[300],
+      //           ),
+      //         ),
+      //         Expanded(
+      //           child: Container(
+      //             color: Colors.white,
+      //           ),
+      //         )
+      //       ],
+      //     )),
+      //     Align(
+      //       alignment: Alignment.topCenter,
+      //       // child: Image.asset(images/,
+      //       // child: Row(
+      //       //   children: <Widget>[
+      //       //     IconButton(
+      //       //       icon: Icon(Icons.arrow_back_ios),
+      //       //       onPressed: () {
+      //       //         Navigator.pop(context);
+      //       //       },
+      //       //     )
+      //       //   ],
+      //       // ),
+      //     )
+      //   ],
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: lightGrey,
         currentIndex: 0, // this will be set when a new tab is tapped
@@ -104,21 +128,21 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DogTapScreen(),
+                  builder: (context) => DocScreen(),
                 ));
           } else {
             index == 1
                 ? Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TrainingStartScreen(),
-                    ),
-                  )
+                      builder: (context) => TapScreen(),
+                    ))
                 : Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TapScreen(),
-                    ));
+                      builder: (context) => TrainingStartScreen(),
+                    ),
+                  );
           }
           ;
         },
@@ -126,22 +150,11 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
           BottomNavigationBarItem(
             icon: new Icon(
               Icons.folder_special,
-              color: primaryColor,
-              size: 40,
-            ),
-            title: new Text(
-              'Mes doc',
-              style: TextStyle(color: primaryColor, fontSize: 20),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(
-              Icons.local_hospital,
               color: secondColor,
               size: 40,
             ),
             title: new Text(
-              'Mes trai',
+              'Mes doc',
               style: TextStyle(color: primaryColor, fontSize: 20),
             ),
           ),
@@ -156,15 +169,16 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
                 style: TextStyle(color: primaryColor, fontSize: 20),
               )),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.sim_card_alert,
-                color: secondColor,
-                size: 40,
-              ),
-              title: Text(
-                'Profil',
-                style: TextStyle(color: primaryColor, fontSize: 20),
-              ))
+            icon: new Icon(
+              Icons.local_hospital,
+              color: secondColor,
+              size: 40,
+            ),
+            title: new Text(
+              'Mes tratttti',
+              style: TextStyle(color: primaryColor, fontSize: 20),
+            ),
+          ),
         ],
       ),
     );

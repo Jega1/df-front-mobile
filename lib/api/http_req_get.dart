@@ -135,6 +135,17 @@ class RestDatasourceGet {
     return res;
   }
 
+  Future getAllSicksByDog({int id}) async {
+    String url = baseurl + "medical/sick/$id";
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+    );
+    Map res = jsonDecode(response.body);
+    print(res);
+    return res;
+  }
+
   //TRAINING
   getAllPack() async {
     String url = baseurl + "pack/";

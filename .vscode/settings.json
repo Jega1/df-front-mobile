@@ -1,3 +1,5 @@
 {
-    "explorer.openEditors.visible": 6
+    "explorer.openEditors.visible": 6,
+    "screencastMode.fontSize": 45,
+    "debug.console.fontSize": 12
 }

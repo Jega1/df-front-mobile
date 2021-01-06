@@ -1,9 +1,15 @@
 import 'package:dog_face/main.dart';
+import 'package:dog_face/models/dog.dart';
+import '../../../../api/http_req_get.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../appColors.dart';
+import '../../../../main.dart';
 
 class EditDog extends StatefulWidget {
+  DogModel dogModel;
+  EditDog({this.dogModel});
+
   @override
   _EditDogState createState() => _EditDogState();
 }
@@ -18,8 +24,17 @@ class _EditDogState extends State<EditDog> {
   TextEditingController birthCertificateNuCtl = TextEditingController();
   TextEditingController passportNuCtl = TextEditingController();
 
-  List<String> _sex = ['Male', 'Female'];
+  List<String> _sex = ['male', 'female'];
   String _selectedSex;
+
+  @override
+  void initState() {
+    // getData();
+    _selectedSex = widget.dogModel.sex;
+    raceCtl.text = widget.dogModel.race;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +64,10 @@ class _EditDogState extends State<EditDog> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "firstname",
+                  labelText: currentDog.firstname,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
-              //controller:,
+              controller: firstnameCtl,
             ),
           ),
           Padding(
@@ -87,7 +102,7 @@ class _EditDogState extends State<EditDog> {
               //  validator: requiredValidator,
 
               decoration: InputDecoration(
-                  labelText: "Numero de puce",
+                  labelText: currentDog.puceNu,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
               //controller:,
@@ -194,5 +209,8 @@ class _EditDogState extends State<EditDog> {
     );
   }
 
-  getData() {}
+  // getData() async {
+  //   Map data = await RestDatasourceGet().getDogById(id: widget.dogModel.idDog);
+  //   print(data);
+  // }
 }

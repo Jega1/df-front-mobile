@@ -4,11 +4,11 @@ import 'package:dog_face/screens/appoint/take_appoint.dart';
 import 'package:flutter/material.dart';
 
 class VetAvailable extends StatefulWidget {
-  final int id_vet;
+  final int idVet;
   final String name;
   final String time;
   final dogModel;
-  VetAvailable({this.id_vet, this.name, this.time, this.dogModel});
+  VetAvailable({this.idVet, this.name, this.time, this.dogModel});
 
   @override
   _VetAvailableState createState() => _VetAvailableState();
@@ -49,7 +49,7 @@ class _VetAvailableState extends State<VetAvailable> {
                             MaterialPageRoute(
                               builder: (context) => TakeAppointScreen(
                                 name: widget.name,
-                                id_vet: widget.id_vet,
+                                idVet: widget.idVet,
                                 time: times[index],
                               ),
                             ),
@@ -68,7 +68,7 @@ class _VetAvailableState extends State<VetAvailable> {
     setState(() {
       isLoading = true;
     });
-    await RestDatasourceGet().getHoursByVet(id: widget.id_vet).then((val) {
+    await RestDatasourceGet().getHoursByVet(id: widget.idVet).then((val) {
       List temp = val["data"];
       temp.forEach((timeData) {
         times.add(TimeModel.fromJson(timeData));

@@ -4,6 +4,7 @@ import 'package:dog_face/screens/appoint/list_consult.dart';
 import 'package:dog_face/screens/dog/dog_list_screen.dart';
 import 'package:dog_face/screens/home/finger.dart';
 import 'package:dog_face/screens/user/user_edit.dart';
+import 'package:dog_face/screens/veterinary/vet_available.dart';
 import 'package:dog_face/screens/veterinary/vet_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -62,53 +63,36 @@ class _UserDashboardState extends State<UserDashboard> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Appointments",
-                        style: TextStyle(color: secondColor, fontSize: 20),
-                      )
-                    ],
-                  ),
-                  height: 150,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: lightBlack,
-                          blurRadius: 5,
-                          offset: Offset(0, 1))
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Memo",
-                        style: TextStyle(color: secondColor, fontSize: 20),
-                      )
-                    ],
-                  ),
-                  height: 150,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: lightBlack,
-                          blurRadius: 5,
-                          offset: Offset(0, 1))
-                    ],
-                    borderRadius: BorderRadius.circular(10),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppointListScreen(),
+                        ));
+                  },
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Appointments",
+                          style: TextStyle(color: secondColor, fontSize: 20),
+                        )
+                      ],
+                    ),
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: lightBlack,
+                            blurRadius: 5,
+                            offset: Offset(0, 1))
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),
@@ -172,34 +156,34 @@ class _UserDashboardState extends State<UserDashboard> {
           BottomNavigationBarItem(
             icon: new Icon(
               Icons.cloud_queue,
-              color: lightBlack,
+              color: thirdColor,
               size: 40,
             ),
             title: new Text(
               'Mes chiens',
-              style: TextStyle(color: lightBlack, fontSize: 20),
+              style: TextStyle(color: thirdColor, fontSize: 20),
             ),
           ),
           BottomNavigationBarItem(
             icon: new Icon(
               Icons.local_hospital,
-              color: lightBlack,
+              color: thirdColor,
               size: 40,
             ),
             title: new Text(
               'Mes vetos',
-              style: TextStyle(color: lightBlack, fontSize: 20),
+              style: TextStyle(color: thirdColor, fontSize: 20),
             ),
           ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                color: lightBlack,
+                color: thirdColor,
                 size: 40,
               ),
               title: Text(
                 'Mes rdv',
-                style: TextStyle(color: lightBlack, fontSize: 20),
+                style: TextStyle(color: thirdColor, fontSize: 20),
               ))
         ],
       ),

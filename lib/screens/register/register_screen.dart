@@ -17,7 +17,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   String dropdownValue = 'Veterinaire';
-  List<String> _typeUser = ['Veterinaire', 'Properietaire, Eleveur'];
+  List<String> _typeUser = ['Veterinaire', 'Properietaire', 'Eleveur'];
   String _selectedUser;
 
   final _formKey = GlobalKey<FormState>();
@@ -143,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     onSaved: (val) {
-                      userModel.telephone = val;
+                      userModel.telephone = int.parse(val);
                     },
                     decoration: InputDecoration(
                         labelText: 'telephone',
@@ -256,6 +256,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (_formKey.currentState.validate()) {
                             _formKey.currentState.save();
                             print(userModel.email);
+                            userModel.isVeterinary =
+                                _selectedUser == 'Veterinaire'
+                                    ? 1.toString()
+                                    : 0.toString();
                             Map res = await RestDatasourceP().userRegisterApi(
                               isVet: _selectedUser == 'Veterinaire' ? 1 : 0,
                               userModel: userModel,
