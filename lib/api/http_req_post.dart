@@ -133,6 +133,15 @@ class RestDatasourceP {
     print(res);
   }
 
+  dogEditApi({DogModel dogModel, id}) async {
+    String url = baseurl + "dog/$id";
+    http.Response response = await http.put(url,
+        body: jsonEncode(dogModel.toJson()),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
+
   ///Vaccin
   Future medicalRegisterApi({MedicalModel medicalModel}) async {
     String url = baseurl + "medical/add-medical";
@@ -156,6 +165,7 @@ class RestDatasourceP {
 
   Future cancelAppointApi({Map data}) async {
     String url = baseurl + "vet/cancel-appoint";
+    print(data);
     http.Response response = await http.post(url,
         body: jsonEncode(data),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});

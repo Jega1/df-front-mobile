@@ -21,6 +21,7 @@ class _VetEditState extends State<VetEdit> {
   TextEditingController passwordCtl = TextEditingController();
   TextEditingController addressCtl = TextEditingController();
   TextEditingController codePostalCtl = TextEditingController();
+  TextEditingController telephoneCtl = TextEditingController();
   TextEditingController villeCtl = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -175,7 +176,7 @@ class _VetEditState extends State<VetEdit> {
     });
     Map res = await RestDatasourceGet().getVetById(id: SharedPrefData().userId);
     addressCtl.text = res["message"][0]["address"];
-    codePostalCtl.text = res["message"][0]["codePostal"];
+    codePostalCtl.text = res["message"][0]["code_postal"];
     villeCtl.text = res["message"][0]["ville"];
 
     setState(() {

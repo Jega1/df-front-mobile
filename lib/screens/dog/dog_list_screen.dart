@@ -32,34 +32,71 @@ class _DogListScreenState extends State<DogListScreen> {
       appBar: AppBar(
         title: Text('listes des chiens'),
       ),
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : dogs.length == 0
-              ? Center(
-                  child: Text("Ajouter votre chien"),
-                )
-              : ListView.builder(
-                  itemCount: dogs == null ? 0 : dogs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () async {
-                        setState(() {
-                          currentDog = dogs[index];
-                        });
+      body:
 
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => DogInfoScreen()));
-                      },
-                      child: ListTile(
-                        title: Text(dogs[index].firstname),
-                        leading: Icon(Icons.donut_large),
-                        trailing: Text(dogs[index].race),
-                      ),
-                    );
-                  },
-                ),
+          //  isLoading
+          //     ? Center(
+          //         child: CircularProgressIndicator(),
+          //       )
+          //     : dogs.length == 0
+          //         ? Center(
+          //             child: Text("Ajouter votre chien"),
+          //           )
+          //         : ListView.builder(
+          //             itemCount: dogs == null ? 0 : dogs.length,
+          //             itemBuilder: (BuildContext context, int index) {
+          //               return GestureDetector(
+          //                 onTap: () async {
+          //                   setState(() {
+          //                     currentDog = dogs[index];
+          //                   });
+
+          //                   Navigator.of(context).push(
+          //                       MaterialPageRoute(builder: (_) => DogInfoScreen()));
+          //                 },
+          //                 child: ListTile(
+          //                   title: Text(dogs[index].firstname),
+          //                   leading: Icon(Icons.donut_large),
+          //                   trailing: Text(dogs[index].race),
+          //                 ),
+          //               );
+          //             },
+          //           ),
+          Container(
+        height: 240,
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: [
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: secondColor,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: shadowList,
+                    ),
+                    margin: EdgeInsets.only(top: 50),
+                  ),
+                  Align(
+                    child: Hero(tag: 1, child: Image.asset('logo..png')),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+                child: Container(
+              margin: EdgeInsets.only(top: 60, bottom: 20),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: shadowList,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20))),
+            ))
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)

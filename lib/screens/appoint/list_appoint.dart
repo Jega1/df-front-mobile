@@ -68,7 +68,7 @@ class _AppointListScreenState extends State<AppointListScreen> {
                                     fontWeight: FontWeight.w400),
                               ),
                               Text(
-                                allConsult[index]["address_cabinet"].toString(),
+                                allConsult[index]["address"].toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
@@ -82,7 +82,7 @@ class _AppointListScreenState extends State<AppointListScreen> {
                                     fontWeight: FontWeight.w400),
                               ),
                               Text(
-                                allConsult[index]["id_vet_hour"].toString(),
+                                allConsult[index]["id_available"].toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
@@ -137,8 +137,7 @@ class _AppointListScreenState extends State<AppointListScreen> {
               FlatButton(
                   onPressed: () async {
                     Map data = {
-                      "available": 1,
-                      "id_vet_hour": allConsult[index]["id_vet_hour"],
+                      "id_available": allConsult[index]["id_available"],
                     };
                     print("data");
                     await RestDatasourceP()

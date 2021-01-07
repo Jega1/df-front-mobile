@@ -1,5 +1,5 @@
 import 'package:dog_face/datas/sharedPref.dart';
-import 'package:dog_face/screens/appoint/list_consult.dart';
+import 'package:dog_face/screens/appoint/list_appoint.dart';
 import 'package:dog_face/screens/home/finger.dart';
 
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_appointments.dart';

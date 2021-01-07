@@ -5,7 +5,7 @@ import 'package:dog_face/models/appointment.dart';
 import 'package:dog_face/models/dog.dart';
 import 'package:dog_face/models/motif.dart';
 import 'package:dog_face/models/time.dart';
-import 'package:dog_face/screens/appoint/list_consult.dart';
+import 'package:dog_face/screens/appoint/list_appoint.dart';
 import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';

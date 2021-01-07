@@ -14,31 +14,33 @@ authUser({
       .userAuthenticate(email: userModel.email, password: userModel.password)
       .then((val) {
     if (val["success"]) {
+      userModel = UserModel.fromJson(val['data']['user']['0']);
       SharedPrefData().setEmail(value: userModel.email);
       SharedPrefData().setPassword(value: userModel.password);
-      //   SharedPrefData().setUserId(value: userModel.idUser);
-      SharedPrefData().setUserId(value: val["data"]["user"]["0"]["id_user"]);
-      SharedPrefData().setUsername(value: val["data"]["user"]["0"]["username"]);
-      //    SharedPrefData().setUsername(value: userModel.username);
-      SharedPrefData()
-          .setIsVet(value: val["data"]["user"]["0"]["is_veterinay"]);
-      userModel = UserModel.fromJson(val['data']['user']['0']);
+      SharedPrefData().setUserId(value: userModel.idUser);
+      //  SharedPrefData().setUserId(value: val["data"]["user"]["0"]["id_user"]);
+      //  SharedPrefData().setUsername(value: val["data"]["user"]["0"]["username"]);
+      SharedPrefData().setUsername(value: userModel.username);
+      SharedPrefData().setIsVet(value: userModel.isVeterinary);
+
       print('USER MODEL');
       print(userModel.toJson());
     }
     if (val["success"]) {
       int isApproved = SharedPrefData().getApprovedAuth();
+
       if (isApproved == -1) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Use fingerprint?"),
+            title: Text("vous voulez l'emprente digital?"),
             actions: <Widget>[
               RaisedButton(
                 onPressed: () {
                   SharedPrefData().setApprovedAuth(val: 1);
                   Navigator.pop(context);
-                  val["data"]["user"]["0"]["is_veterinay"] == "1"
+                  userModel.isVeterinary == "1"
+                      // val["data"]["user"]["0"]["is_veterinay"] == "1"
                       ? Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -56,7 +58,8 @@ authUser({
                 onPressed: () {
                   SharedPrefData().setApprovedAuth(val: 0);
                   Navigator.pop(context);
-                  val["data"]["user"]["0"]["is_veterinary"] == "1"
+                  //    val["data"]["user"]["0"]["is_veterinary"] == "1"
+                  userModel.isVeterinary == "1"
                       ? Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -76,7 +79,8 @@ authUser({
       } else {
         SharedPrefData().setApprovedAuth(val: 1);
         Navigator.pop(context);
-        val["data"]["user"]["0"]["is_veterinay"] == "1"
+        userModel.isVeterinary == "1"
+            //   val["data"]["user"]["0"]["is_veterinay"] == "1"
             ? Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -1,8 +1,8 @@
+import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/dog.dart';
-import '../../../../api/http_req_get.dart';
 import 'package:flutter/material.dart';
-
+import 'package:form_field_validator/form_field_validator.dart';
 import '../../../../appColors.dart';
 import '../../../../main.dart';
 
@@ -15,6 +15,7 @@ class EditDog extends StatefulWidget {
 }
 
 class _EditDogState extends State<EditDog> {
+  DateTime now = DateTime.now();
   TextEditingController sexCtl = TextEditingController();
   TextEditingController firstnameCtl = TextEditingController();
   TextEditingController lastnameCtl = TextEditingController();
@@ -24,14 +25,58 @@ class _EditDogState extends State<EditDog> {
   TextEditingController birthCertificateNuCtl = TextEditingController();
   TextEditingController passportNuCtl = TextEditingController();
 
-  List<String> _sex = ['male', 'female'];
+  final _formKey = GlobalKey<FormState>();
+  DogModel dogModel = DogModel();
+  final requiredValidator =
+      RequiredValidator(errorText: 'This field is required');
+  List<String> _sex = ['Male', 'Female'];
   String _selectedSex;
+  String convertedDate = "";
+
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime _selDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2050),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            backgroundColor: pinkDark,
+            primaryColor: primaryColor,
+            accentColor: primaryColor,
+            colorScheme: ColorScheme.light(primary: primaryColor),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child,
+        );
+      },
+    );
+    if (_selDate != null) {
+      setState(() {
+        now = _selDate;
+        convertedDate = "${now.day.toString().padLeft(2, '0')}/"
+            "${now.month.toString().padLeft(2, '0')}/"
+            "${now.year.toString()}   ";
+
+        birthDateCtl.text = convertedDate;
+      });
+    }
+  }
 
   @override
   void initState() {
     // getData();
     _selectedSex = widget.dogModel.sex;
     raceCtl.text = widget.dogModel.race;
+    //  firstnameCtl = currentDog.firstname;
+    firstnameCtl.text = widget.dogModel.firstname;
+    lastnameCtl.text = widget.dogModel.lastname;
+    firstnameCtl.text = widget.dogModel.firstname;
+    puceNuCtl.text = widget.dogModel.puceNu;
+    birthDateCtl.text = widget.dogModel.birthDate;
+    birthCertificateNuCtl.text = widget.dogModel.birthCertificateNu;
+    passportNuCtl.text = widget.dogModel.passportNu;
 
     super.initState();
   }
@@ -73,12 +118,12 @@ class _EditDogState extends State<EditDog> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              initialValue: currentDog.firstname,
+              initialValue: currentDog.lastname,
               onSaved: (val) {
-                currentDog.firstname = val;
+                currentDog.lastname = val;
               },
               decoration: InputDecoration(
-                  labelText: "lastname",
+                  //  labelText: "lastname",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
               //controller:,
@@ -90,10 +135,10 @@ class _EditDogState extends State<EditDog> {
               //  validator: requiredValidator,
 
               decoration: InputDecoration(
-                  labelText: "Race",
+                  // labelText: "Race",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
-              //controller:,
+              controller: raceCtl,
             ),
           ),
           Padding(
@@ -105,14 +150,14 @@ class _EditDogState extends State<EditDog> {
                   labelText: currentDog.puceNu,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
-              //controller:,
+              controller: puceNuCtl,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                //     _selectDate(context);
+                _selectDate(context);
               },
               child: Column(
                 children: <Widget>[
@@ -143,9 +188,12 @@ class _EditDogState extends State<EditDog> {
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(width: 1.0, color: Colors.grey[400]),
                       ),
-                      child: Text(
-                        '',
-                        //  convertedDate,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            // labelText: "Race",
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                        controller: birthDateCtl,
                         style: TextStyle(
                           fontSize: 18,
                         ),
@@ -167,7 +215,7 @@ class _EditDogState extends State<EditDog> {
                   labelText: "Nu acte de naissance",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
-              //controller:,
+              controller: birthCertificateNuCtl,
             ),
           ),
           Padding(
@@ -181,7 +229,7 @@ class _EditDogState extends State<EditDog> {
                   labelText: "Numero de passport",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
-              //controller:,
+              controller: passportNuCtl,
             ),
           ),
           Padding(
@@ -197,7 +245,21 @@ class _EditDogState extends State<EditDog> {
               child: FlatButton(
                   padding:
                       EdgeInsets.only(left: 50, top: 10, right: 50, bottom: 10),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      dogModel.birthDate = birthDateCtl.text;
+                      dogModel.sex = _selectedSex;
+                      //      id_user= SharedPrefData().userId
+                      print(dogModel.lastname);
+                      RestDatasourceP().dogEditApi(
+                        dogModel: dogModel,
+                      );
+                      Navigator.pop(
+                        context,
+                      );
+                    }
+                  },
                   child: new Text(
                     "Register",
                     style: TextStyle(fontSize: 20, fontFamily: "Arial"),

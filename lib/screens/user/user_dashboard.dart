@@ -1,12 +1,13 @@
 import 'package:dog_face/appColors.dart';
 import 'package:dog_face/datas/sharedPref.dart';
-import 'package:dog_face/screens/appoint/list_consult.dart';
+import 'package:dog_face/screens/appoint/list_appoint.dart';
 import 'package:dog_face/screens/dog/dog_list_screen.dart';
 import 'package:dog_face/screens/home/finger.dart';
 import 'package:dog_face/screens/user/user_edit.dart';
-import 'package:dog_face/screens/veterinary/vet_available.dart';
+
 import 'package:dog_face/screens/veterinary/vet_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserDashboard extends StatefulWidget {
   @override
@@ -155,35 +156,35 @@ class _UserDashboardState extends State<UserDashboard> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(
-              Icons.cloud_queue,
-              color: thirdColor,
-              size: 40,
+              FontAwesomeIcons.paw,
+              color: lightBlack,
+              size: 30,
             ),
             title: new Text(
               'Mes chiens',
-              style: TextStyle(color: thirdColor, fontSize: 20),
+              style: TextStyle(color: lightBlack, fontSize: 20),
             ),
           ),
           BottomNavigationBarItem(
             icon: new Icon(
-              Icons.local_hospital,
-              color: thirdColor,
-              size: 40,
+              FontAwesomeIcons.hospitalUser,
+              color: lightBlack,
+              size: 30,
             ),
             title: new Text(
               'Mes vetos',
-              style: TextStyle(color: thirdColor, fontSize: 20),
+              style: TextStyle(color: lightBlack, fontSize: 20),
             ),
           ),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.person,
-                color: thirdColor,
-                size: 40,
+                FontAwesomeIcons.appStoreIos,
+                color: lightBlack,
+                size: 30,
               ),
               title: Text(
                 'Mes rdv',
-                style: TextStyle(color: thirdColor, fontSize: 20),
+                style: TextStyle(color: lightBlack, fontSize: 20),
               ))
         ],
       ),

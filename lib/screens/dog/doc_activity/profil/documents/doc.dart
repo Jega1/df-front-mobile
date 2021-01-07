@@ -8,8 +8,9 @@ class DocScreen extends StatefulWidget {
 class _DocScreenState extends State<DocScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Doc screen"),
-    );
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('add a document'),
+    ));
   }
 }

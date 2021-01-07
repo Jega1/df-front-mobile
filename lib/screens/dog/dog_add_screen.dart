@@ -2,6 +2,7 @@ import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/models/dog.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../appColors.dart';
 

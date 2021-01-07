@@ -171,6 +171,7 @@ class _UserEditState extends State<UserEdit> {
                               codePostal: codePostalCtl.text,
                               ville: villeCtl.text,
                               telephone: telephoneCtl.text);
+                          Navigator.pop(context);
                         }
                       },
                       child: Text(
