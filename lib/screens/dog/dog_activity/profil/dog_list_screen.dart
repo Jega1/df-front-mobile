@@ -3,9 +3,9 @@ import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/dog.dart';
 import 'package:flutter/material.dart';
-import '../../appColors.dart';
-import 'doc_activity/memo/notification.dart';
-import 'doc_activity/profil/dog_info.dart';
+import '../../../../appColors.dart';
+
+import 'dog_info.dart';
 import 'dog_add_screen.dart';
 
 class DogListScreen extends StatefulWidget {
@@ -62,9 +62,45 @@ class _DogListScreenState extends State<DogListScreen> {
           //               );
           //             },
           //           ),
-          Container(
-        height: 240,
-        margin: EdgeInsets.symmetric(horizontal: 20),
+          isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ListView.builder(
+                  itemCount: dogs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return dogListCont(dogs[index]);
+                  },
+                ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => DogAddScreen()))
+              .whenComplete(() {
+            getData();
+          });
+        },
+        child: Icon(Icons.add),
+        backgroundColor: primaryColor,
+      ),
+    );
+  }
+
+  Container dogListCont(
+    DogModel item,
+  ) {
+    return Container(
+      height: 240,
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            currentDog = item;
+          });
+
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => DogInfoScreen()));
+        },
         child: Row(
           children: [
             Expanded(
@@ -72,15 +108,19 @@ class _DogListScreenState extends State<DogListScreen> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: secondColor,
+                      // color: secondColor,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: shadowList,
+                      image: DecorationImage(
+                        image: item.img.length != 0
+                            ? NetworkImage(
+                                item.img[0]["dog_image"],
+                              )
+                            : AssetImage('assets/logo.jpg'),
+                      ),
                     ),
                     margin: EdgeInsets.only(top: 50),
                   ),
-                  Align(
-                    child: Hero(tag: 1, child: Image.asset('logo..png')),
-                  )
                 ],
               ),
             ),
@@ -93,20 +133,12 @@ class _DogListScreenState extends State<DogListScreen> {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       bottomRight: Radius.circular(20))),
+              child: Column(
+                children: <Widget>[],
+              ),
             ))
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => DogAddScreen()))
-              .whenComplete(() {
-            getData();
-          });
-        },
-        child: Icon(Icons.add),
-        backgroundColor: primaryColor,
       ),
     );
   }

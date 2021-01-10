@@ -3,8 +3,9 @@ import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/vaccin.dart';
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/vaccin/list_vaccin.dart';
+import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/vaccin/list_vaccin.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../../../../../../appColors.dart';
 import '../tap.dart';
@@ -57,7 +58,7 @@ class _AddVaccinState extends State<AddVaccin> {
                 child: Row(
                   children: <Widget>[
                     Icon(
-                      Icons.plus_one,
+                      FontAwesomeIcons.clinicMedical,
                       size: 20.0,
                       color: primaryColor,
                     ),

@@ -96,6 +96,17 @@ class RestDatasourceGet {
     return res;
   }
 
+  Future getImagesByDogId({int id}) async {
+    String url = baseurl + "dog/images/$id";
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+    );
+    Map res = jsonDecode(response.body);
+    print(res);
+    return res;
+  }
+
 //APPOINTMENTS
   Future getAppointsByUser({int id}) async {
     String url = baseurl + "appoint/user/$id";

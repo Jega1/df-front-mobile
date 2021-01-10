@@ -203,11 +203,7 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(colors: [
-                        // Color.fromRGBO(143, 148,251,.1),
-                        Color.fromRGBO(252, 140, 76, .9),
-                        Color.fromRGBO(122, 135, 238, .9),
-                      ])),
+                      color: primaryColor),
                   child: FlatButton(
                       padding: EdgeInsets.only(
                           left: 50, top: 10, right: 50, bottom: 10),

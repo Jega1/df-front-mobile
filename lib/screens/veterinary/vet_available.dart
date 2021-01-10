@@ -2,6 +2,7 @@ import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/models/time.dart';
 import 'package:dog_face/screens/appoint/take_appoint.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class VetAvailable extends StatefulWidget {
   final int idVet;
@@ -80,6 +81,7 @@ class _VetAvailableState extends State<VetAvailable> {
   }
 
   Card getStructuredGridCell(TimeModel data) {
+    DateTime date = DateTime.parse(data.time);
     return new Card(
         elevation: 5.5,
         child: new Column(
@@ -92,7 +94,7 @@ class _VetAvailableState extends State<VetAvailable> {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(data.time),
+                  new Text(DateFormat("yyyy-MM-dd ").format(date)),
                 ],
               ),
             ),

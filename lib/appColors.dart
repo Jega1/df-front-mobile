@@ -8,7 +8,7 @@ Color thirdColor = const Color(0xFFFC6353);
 Color pinkLight = const Color(0xffEDE4EF);
 Color pinkDark = const Color(0xFFF58524);
 Color paleGreen = const Color(0xFF79FCB6);
-
+Color titleTextColor = const Color(0xff1E1C61);
 Color darkOrange = const Color(0xffEC9259);
 Color darkRed = const Color(0xff8B0000);
 Color red = const Color(0xff8B0000);

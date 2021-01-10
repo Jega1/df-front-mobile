@@ -1,4 +1,4 @@
-import 'package:dog_face/screens/dog/doc_activity/profil/documents/photoDialog.dart';
+import 'package:dog_face/screens/dog/dog_activity/profil/documents/photoDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -9,40 +9,26 @@ class PhotoScreen extends StatefulWidget {
   _PhotoScreenState createState() => _PhotoScreenState();
 }
 
-ImagePicker imagePicker = ImagePicker();
+int index = 0;
+ImagePicker picker = ImagePicker();
 
-// getImageFromPhone({int choice}) async {
-//   PickedFile file;
-//   if (choice == 1) {
-//     file = await imagePicker.getImage(
-//         source: ImageSource.camera, imageQuality: 60);
-//   } else {
-//     file = await imagePicker.getImage(
-//         source: ImageSource.gallery, imageQuality: 60);
-//   }
-// }
+Future getImage(int index) async {
+  final pickedFile =
+      await picker.getImage(source: ImageSource.camera, imageQuality: 60);
+}
 
-// Future getImage(int index) async {
-//   final pickedFile =
-//       await picker.getImage(source: ImageSource.camera, imageQuality: 60);
-//   setState(() {
-//     imagePath[index] = pickedFile.path;
-//   });
-// }
-
-// Future getImageFromGallery(int index) async {
-//   final pickedFile =
-//       await picker.getImage(source: ImageSource.gallery, imageQuality: 60);
-//   setState(() {
-//     imagePath[index] = pickedFile.path;
-//   });
-//   updateCompteurWithImages();
-// }
+Future getImageFromGallery(int index) async {
+  final pickedFile =
+      await picker.getImage(source: ImageSource.gallery, imageQuality: 60);
+}
 
 class _PhotoScreenState extends State<PhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Ajouter un document'),
+      ),
       body: GridView.builder(
         //itemCount: images.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -96,6 +82,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                     height: 30,
                     child: GestureDetector(
                       onTap: () {
+                        getImage(index);
                         Navigator.pop(context);
                       },
                       child: Row(
@@ -123,6 +110,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                     height: 30,
                     child: GestureDetector(
                       onTap: () {
+                        getImageFromGallery(index);
                         Navigator.pop(context);
                       },
                       child: Row(

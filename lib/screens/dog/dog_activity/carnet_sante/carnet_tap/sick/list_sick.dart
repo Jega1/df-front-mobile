@@ -1,23 +1,22 @@
-import 'package:dog_face/main.dart';
-import 'package:dog_face/models/medical.dart';
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/vaccin/edit_vaccin.dart';
-import 'package:flutter/material.dart';
 import 'package:dog_face/api/http_req_get.dart';
-import 'add_vaccin.dart';
+import 'package:dog_face/models/medical.dart';
+import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/sick/add_sick.dart';
+import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/vaccin/edit_vaccin.dart';
+import 'package:flutter/material.dart';
+import '../../../../../../main.dart';
 
-class ListVaccin extends StatefulWidget {
+class ListSick extends StatefulWidget {
   @override
-  _ListVaccinState createState() => _ListVaccinState();
+  _ListSickState createState() => _ListSickState();
 }
 
-class _ListVaccinState extends State<ListVaccin> {
+class _ListSickState extends State<ListSick> {
   bool isLoading = false;
-  List<MedicalModel> vaccins = [];
+  List<MedicalModel> sicks = [];
 
   @override
   void initState() {
     getData();
-
     super.initState();
   }
 
@@ -28,12 +27,12 @@ class _ListVaccinState extends State<ListVaccin> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : vaccins.length == 0
+          : sicks.length == 0
               ? Center(
                   child: Text("Ajouter votre chien"),
                 )
               : ListView.builder(
-                  itemCount: vaccins.length,
+                  itemCount: sicks.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () async {
@@ -43,16 +42,16 @@ class _ListVaccinState extends State<ListVaccin> {
                             builder: (_) => EditVaccinScreen(MedicalModel)));
                       },
                       child: ListTile(
-                        title: Text(vaccins[index].name),
+                        title: Text(sicks[index].name),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(vaccins[index].firstDate),
-                            Text(vaccins[index].nextDate),
+                            Text(sicks[index].firstDate),
+                            Text(sicks[index].nextDate),
                           ],
                         ),
                         leading: Icon(Icons.info_outline),
-                        trailing: Text(vaccins[index].firstDate),
+                        trailing: Text(sicks[index].firstDate),
                       ),
                     );
                   },
@@ -60,7 +59,7 @@ class _ListVaccinState extends State<ListVaccin> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => AddVaccin()))
+              .push(MaterialPageRoute(builder: (_) => AddSick()))
               .whenComplete(() {
             getData();
           });
@@ -73,17 +72,17 @@ class _ListVaccinState extends State<ListVaccin> {
   }
 
   void getData() async {
-    vaccins = [];
+    sicks = [];
     setState(() {
       isLoading = true;
     });
     await RestDatasourceGet()
-        .getAllVaccinsByDog(id: currentDog.idDog)
+        .getAllSicksByDog(id: currentDog.idDog)
         .then((val) {
       List temp = val["data"];
       print(temp);
-      temp.forEach((vaccinData) {
-        vaccins.add(MedicalModel.fromJson(vaccinData));
+      temp.forEach((sickData) {
+        sicks.add(MedicalModel.fromJson(sickData));
       });
       setState(() {
         isLoading = false;

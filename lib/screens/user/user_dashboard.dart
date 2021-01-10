@@ -1,7 +1,7 @@
 import 'package:dog_face/appColors.dart';
 import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/screens/appoint/list_appoint.dart';
-import 'package:dog_face/screens/dog/dog_list_screen.dart';
+import 'package:dog_face/screens/dog/dog_activity/profil/dog_list_screen.dart';
 import 'package:dog_face/screens/home/finger.dart';
 import 'package:dog_face/screens/user/user_edit.dart';
 

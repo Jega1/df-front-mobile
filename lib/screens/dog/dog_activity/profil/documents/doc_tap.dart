@@ -1,7 +1,7 @@
 import 'package:dog_face/main.dart';
 
-import 'package:dog_face/screens/dog/doc_activity/profil/documents/doc.dart';
-import 'package:dog_face/screens/dog/doc_activity/profil/documents/photo.dart';
+import 'package:dog_face/screens/dog/dog_activity/profil/documents/doc.dart';
+import 'package:dog_face/screens/dog/dog_activity/profil/documents/photo.dart';
 import 'package:flutter/material.dart';
 
 class DogTapScreen extends StatefulWidget {

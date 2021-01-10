@@ -246,19 +246,29 @@ class _EditDogState extends State<EditDog> {
                   padding:
                       EdgeInsets.only(left: 50, top: 10, right: 50, bottom: 10),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      dogModel.birthDate = birthDateCtl.text;
-                      dogModel.sex = _selectedSex;
-                      //      id_user= SharedPrefData().userId
-                      print(dogModel.lastname);
-                      RestDatasourceP().dogEditApi(
-                        dogModel: dogModel,
-                      );
-                      Navigator.pop(
-                        context,
-                      );
-                    }
+                    // if (_formKey.currentState.validate()) {
+                    //   _formKey.currentState.save();
+                    //   dogModel.birthDate = birthDateCtl.text;
+                    //   dogModel.sex = _selectedSex;
+                    //      id_user= SharedPrefData().userId
+                    print(dogModel.lastname);
+                    widget.dogModel.firstname = firstnameCtl.text;
+
+                    widget.dogModel.lastname = lastnameCtl.text;
+                    widget.dogModel.sex = _selectedSex;
+                    widget.dogModel.race = raceCtl.text;
+                    widget.dogModel.birthDate = birthDateCtl.text;
+                    widget.dogModel.birthCertificateNu =
+                        birthCertificateNuCtl.text;
+                    widget.dogModel.passportNu = passportNuCtl.text;
+                    RestDatasourceP().dogEditApi(
+                      dogModel: widget.dogModel,
+                    );
+
+                    Navigator.pop(
+                      context,
+                    );
+                    //      }
                   },
                   child: new Text(
                     "Register",

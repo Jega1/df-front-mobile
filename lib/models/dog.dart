@@ -29,33 +29,31 @@ class DogModel {
       this.race,
       this.puceNu,
       this.birthDate,
-      //this.convertedDate,
       this.birthCertificateNu,
       this.passportNu,
       this.img});
 
   factory DogModel.fromJson(Map<String, dynamic> json) => DogModel(
-        idDog: json["id_dog"],
-        firstname: json["firstname"],
-        lastname: json["lastname"],
-        sex: json["sex"],
-        race: json["race"],
-        puceNu: json["puce_nu"],
-        //   convertedDate: json["birthDate"],
-        birthDate: json["birth_date"],
-        birthCertificateNu: json["birthCertificateNu"],
-        passportNu: json["passportNu"],
-      );
+      idDog: json["id_dog"],
+      firstname: json["firstname"],
+      lastname: json["lastname"],
+      sex: json["sex"],
+      race: json["race"],
+      puceNu: json["puce_nu"],
+      birthDate: json["birth_date"],
+      birthCertificateNu: json["birth_certificate_nu"],
+      passportNu: json["passport_nu"],
+      img: json['images']);
   Map<String, dynamic> toJson() => {
         "firstname": firstname,
         "lastname": lastname,
         "sex": sex,
         "race": race,
         "puceNu": puceNu,
-        //  "birthDate": convertedDate,
         "birth_date": birthDate,
-        "birthCertificateNu": birthCertificateNu,
-        "passportNu": passportNu,
+        "birth_certificate_nu": birthCertificateNu,
+        "passport_nu": passportNu,
+        "images": img,
         "id_user": SharedPrefData().userId
       };
 }

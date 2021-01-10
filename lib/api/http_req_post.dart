@@ -13,41 +13,6 @@ String baseurl = "http://10.0.2.2:8000/api/";
 class RestDatasourceP {
 //USER
 
-/*
-  userRegisterApi({
-    int isVet,
-    UserModel userModel,
-  }) async {
-    String url = baseurl + "user/register";
-    Map data = {};
-    if (isVet == 1) {
-      data = {
-        "username": userModel.username,
-        "email": userModel.email,
-        "password": userModel.password,
-        "address_cabinet": userModel.addressCabinet,
-        "code_postal": userModel.code_postal,
-        "ville": userModel.ville,
-        "is_veterinay": "1"
-      };
-    } else {
-      data = {
-        "username": userModel.username,
-        "email": userModel.email,
-        "password": userModel.password,
-        "is_veterinay": 0
-      };
-    }
-    http.Response response = await http.post(url,
-        body: jsonEncode(data),
-        headers: {HttpHeaders.contentTypeHeader: "application/json"});
-    Map res = jsonDecode(response.body);
-    return res;
-  }
-
-
-*/
-
   userRegisterApi({
     int isVet,
     UserModel userModel,
@@ -133,13 +98,31 @@ class RestDatasourceP {
     print(res);
   }
 
-  dogEditApi({DogModel dogModel, id}) async {
-    String url = baseurl + "dog/$id";
+  dogEditApi({DogModel dogModel}) async {
+    String url = baseurl + "dog/${dogModel.idDog}";
+    Map data = dogModel.toJson();
     http.Response response = await http.put(url,
-        body: jsonEncode(dogModel.toJson()),
+        body: jsonEncode(data),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});
     Map res = jsonDecode(response.body);
     print(res);
+  }
+
+  //image
+  //! Fix this api
+  uplodeImage({File image, int id}) async {
+    String url = baseurl + "dog/add-dog-image";
+    var postUri = Uri.parse(url);
+    var request = new http.MultipartRequest("POST", postUri);
+    final imagefile = await http.MultipartFile.fromPath("dogImage", image.path);
+    request.files.add(imagefile);
+    request.fields["id_dog"] = id.toString();
+    try {
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+      Map res = json.decode(response.body);
+      return res;
+    } catch (e) {}
   }
 
   ///Vaccin
@@ -152,7 +135,7 @@ class RestDatasourceP {
     print(res);
   }
 
-//
+//APPOINTMENT
 
   Future takeAppointApi({Map data}) async {
     String url = baseurl + "vet/take-appoint";
@@ -172,6 +155,8 @@ class RestDatasourceP {
     Map res = jsonDecode(response.body);
     print(res);
   }
+
+//
 
   // Future editUsereeeeeee(
   //     {int id,

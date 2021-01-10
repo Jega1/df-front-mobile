@@ -1,15 +1,16 @@
-import 'package:dog_face/main.dart';
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/tap.dart';
-import 'package:dog_face/screens/dog/doc_activity/training/trainning.dart';
-import 'package:flutter/material.dart';
-import '../../../../appColors.dart';
-
 import 'dart:io';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 
-import 'documents/doc.dart';
+import 'package:dog_face/api/http_req_post.dart';
+import 'package:dog_face/main.dart';
+import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/tap.dart';
+import 'package:dog_face/screens/dog/dog_activity/profil/documents/photoDialog.dart';
+import 'package:dog_face/screens/dog/dog_activity/training/trainning.dart';
+import 'package:dog_face/widget/photo.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../../appColors.dart';
+import 'documents/photo.dart';
 import 'dog_edit.dart';
 
 class DogInfoScreen extends StatefulWidget {
@@ -19,6 +20,8 @@ class DogInfoScreen extends StatefulWidget {
 
 class _DogInfoScreenState extends State<DogInfoScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  File selectedImage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +43,25 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
             children: [
               Expanded(
                 child: Container(
-                  color: lightGrey,
-                ),
+                    color: lightGrey,
+                    child: selectedImage == null
+                        ? currentDog.img != null && currentDog.img.length != 0
+                            ? Container(
+                                width: double.infinity,
+                                child: Image(
+                                  image: NetworkImage(
+                                      currentDog.img[0]["dog_image"]),
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Text("No  image")
+                        : Container(
+                            width: double.infinity,
+                            child: Image(
+                              image: FileImage(selectedImage),
+                              fit: BoxFit.cover,
+                            ),
+                          )),
               ),
               Expanded(
                 child: Container(
@@ -58,7 +78,33 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
                 children: <Widget>[
                   Hero(tag: 1, child: Image.asset('logo.png')),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showSelectionDialog(
+                          context: context,
+                          function: () {
+                            setState(() {});
+                          },
+                          //  index: imageIndex,
+                          getImage: () async {
+                            PickedFile file = await getImageFromCamera();
+                            selectedImage = File(file.path);
+                            RestDatasourceP().uplodeImage(
+                              image: selectedImage,
+                              id: currentDog.idDog,
+                            );
+                            setState(() {});
+                          },
+                          getImageFromGallery: () async {
+                            PickedFile file = await imageFromGallery();
+                            selectedImage = File(file.path);
+                            print(selectedImage.path);
+                            RestDatasourceP().uplodeImage(
+                              image: selectedImage,
+                              id: currentDog.idDog,
+                            );
+                            setState(() {});
+                          });
+                    },
                     child: Container(
                       height: 50,
                       width: 60,
@@ -135,8 +181,8 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text(currentDog.sex),
-                  )
+                    child: Text(currentDog.birthCertificateNu),
+                  ),
                 ],
               ),
             ),
@@ -151,7 +197,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DocScreen(),
+                  builder: (context) => PhotoScreen(),
                 ));
           } else {
             index == 1
@@ -172,7 +218,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(
-              Icons.folder_special,
+              FontAwesomeIcons.folderOpen,
               color: secondColor,
               size: 40,
             ),
@@ -183,7 +229,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
           ),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.sim_card_alert,
+                FontAwesomeIcons.bookMedical,
                 color: secondColor,
                 size: 40,
               ),
@@ -193,12 +239,12 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
               )),
           BottomNavigationBarItem(
             icon: new Icon(
-              Icons.local_hospital,
+              FontAwesomeIcons.dog,
               color: secondColor,
               size: 40,
             ),
             title: new Text(
-              'Mes tratttti',
+              'Mes traning',
               style: TextStyle(color: primaryColor, fontSize: 20),
             ),
           ),

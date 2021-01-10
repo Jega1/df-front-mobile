@@ -1,8 +1,7 @@
 import 'package:dog_face/main.dart';
 
-import 'package:dog_face/screens/dog/doc_activity/carnet_sante/carnet_tap/tap.dart';
-import 'package:dog_face/screens/dog/doc_activity/profil/dog_edit.dart';
-import 'package:dog_face/screens/dog/doc_activity/training/trainning.dart';
+import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/tap.dart';
+import 'package:dog_face/screens/dog/dog_activity/training/trainning.dart';
 import 'package:flutter/material.dart';
 import '../appColors.dart';
 
