@@ -5,6 +5,8 @@ import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_dash.dart';
 import 'package:flutter/material.dart';
 
+import '../../appColors.dart';
+
 class WellcomeScreen extends StatefulWidget {
   @override
   _WellcomeScreenState createState() => _WellcomeScreenState();
@@ -20,7 +22,20 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
+        body: Container(
+      height: 200,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: new AssetImage('assets/app.png'),
+          fit: BoxFit.fill,
+        ),
+        color: white,
+        boxShadow: [
+          BoxShadow(color: lightBlack, blurRadius: 5, offset: Offset(0, 1))
+        ],
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Text('Splash screen ici wellcome screen'),
     ));
   }

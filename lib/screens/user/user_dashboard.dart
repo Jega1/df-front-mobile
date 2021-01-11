@@ -30,27 +30,39 @@ class _UserDashboardState extends State<UserDashboard> {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        minRadius: 30,
-                        maxRadius: 55,
-                        // child: Text('AH'),
-                        backgroundImage: NetworkImage(
-                            'https://www.woolha.com/media/2020/03/eevee.png'),
-                      ),
-                      Text(
-                        "Vous avez 1 chien",
-                        style: TextStyle(color: secondColor, fontSize: 20),
-                      )
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DogListScreen(),
+                          ));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // CircleAvatar(
+                        //   minRadius: 30,
+                        //   maxRadius: 55,
+                        //   backgroundImage: NetworkImage(
+                        //       'https://www.woolha.com/media/2020/03/eevee.png'),
+                        // ),
+                        Text(
+                          "Mes dogs",
+                          style: TextStyle(color: secondColor, fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
-                  height: 150,
+                  height: 200,
                   width: double.infinity,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: new AssetImage('assets/dogs.jpg'),
+                      fit: BoxFit.fill,
+                    ),
                     color: white,
                     boxShadow: [
                       BoxShadow(
@@ -73,18 +85,32 @@ class _UserDashboardState extends State<UserDashboard> {
                         ));
                   },
                   child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Appointments",
-                          style: TextStyle(color: secondColor, fontSize: 20),
-                        )
-                      ],
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VetListScreen(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Mes veterinaires",
+                            style: TextStyle(color: secondColor, fontSize: 20),
+                          )
+                        ],
+                      ),
                     ),
-                    height: 150,
+                    height: 200,
                     width: double.infinity,
                     decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: new AssetImage('assets/doctors.png'),
+                        fit: BoxFit.fill,
+                      ),
                       color: white,
                       boxShadow: [
                         BoxShadow(
@@ -100,18 +126,31 @@ class _UserDashboardState extends State<UserDashboard> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Vetos",
-                        style: TextStyle(color: secondColor, fontSize: 20),
-                      )
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppointListScreen(),
+                          ));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Mes RDV",
+                          style: TextStyle(color: secondColor, fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
-                  height: 150,
+                  height: 200,
                   width: double.infinity,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: new AssetImage('assets/app.png'),
+                      fit: BoxFit.fill,
+                    ),
                     color: white,
                     boxShadow: [
                       BoxShadow(
@@ -127,6 +166,8 @@ class _UserDashboardState extends State<UserDashboard> {
           ),
         ),
       ),
+
+      /*
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: lightGrey,
         currentIndex: 0, // this will be set when a new tab is tapped
@@ -188,6 +229,9 @@ class _UserDashboardState extends State<UserDashboard> {
               ))
         ],
       ),
+
+
+      */
     );
   }
 

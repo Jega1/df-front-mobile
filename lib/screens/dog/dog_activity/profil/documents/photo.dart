@@ -1,6 +1,12 @@
+import 'dart:io';
+
+import 'package:dog_face/api/http_req_post.dart';
+import 'package:dog_face/main.dart';
 import 'package:dog_face/screens/dog/dog_activity/profil/documents/photoDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 import '../../../../../appColors.dart';
 
@@ -9,129 +15,108 @@ class PhotoScreen extends StatefulWidget {
   _PhotoScreenState createState() => _PhotoScreenState();
 }
 
-int index = 0;
-ImagePicker picker = ImagePicker();
-
-Future getImage(int index) async {
-  final pickedFile =
-      await picker.getImage(source: ImageSource.camera, imageQuality: 60);
-}
-
-Future getImageFromGallery(int index) async {
-  final pickedFile =
-      await picker.getImage(source: ImageSource.gallery, imageQuality: 60);
-}
-
 class _PhotoScreenState extends State<PhotoScreen> {
+  List<Asset> resultList = List<Asset>();
+  List<Asset> images = List<Asset>();
+  String error = "No error detected";
+  bool isLoading = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    loadAssets();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ajouter un document'),
       ),
-      body: GridView.builder(
-        //itemCount: images.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-            onTap: () {},
-            child: Container(
-              height: 50,
-              //margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-            ),
-          );
-        },
-      ),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : images.length == 0
+              ? Center(
+                  child: Text('Error: $error'),
+                )
+              : Container(
+                  child: buildGridView(),
+                ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showSelectionDialog(
-              context: context,
-              function: () {
-                setState(() {});
-              },
-              //  index: imageIndex,
-              getImage: () {
-                // getImageFromPhone(choice: 1);
-              },
-              getImageFromGallery: () {
-                //getImageFromPhone(choice: 2);
-              });
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+          for (var item in images) {
+            var path =
+                await FlutterAbsolutePath.getAbsolutePath(item.identifier);
+            var file = await getImageFileFromAsset(path);
+            await RestDatasourceP()
+                .uplodeImage(image: file, id: currentDog.idDog);
+          }
+          Navigator.pop(context);
+          setState(() {
+            isLoading = false;
+          });
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.cloud_upload),
         backgroundColor: primaryColor,
       ),
     );
   }
 
-  void showImageDialog(BuildContext context, int index) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            title: Text('ffgjgvhgvhj,vbhj'),
-            content: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 30,
-                    child: GestureDetector(
-                      onTap: () {
-                        getImage(index);
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.linked_camera,
-                            color: primaryColor,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          Text(
-                            'fffhjhhk',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Container(
-                    height: 30,
-                    child: GestureDetector(
-                      onTap: () {
-                        getImageFromGallery(index);
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.camera,
-                            color: primaryColor,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          Text("gghhbhbnjbj"),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ));
-      },
+  Widget buildGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(images.length, (index) {
+        Asset asset = images[index];
+        return AssetThumb(
+          asset: asset,
+          width: 300,
+          height: 300,
+        );
+      }),
     );
+  }
+
+  Future<File> getImageFileFromAsset(String path) async {
+    final file = File(path);
+    return file;
+  }
+
+  Future<void> loadAssets() async {
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      images = resultList;
+      // _error = error;
+    });
   }
 }

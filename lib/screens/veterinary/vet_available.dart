@@ -40,7 +40,7 @@ class _VetAvailableState extends State<VetAvailable> {
                 )
               : GridView.count(
                   primary: true,
-                  crossAxisCount: 2,
+                  crossAxisCount: 3,
                   childAspectRatio: 0.99,
                   children: List.generate(times.length, (index) {
                     return InkWell(
@@ -95,6 +95,7 @@ class _VetAvailableState extends State<VetAvailable> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Text(DateFormat("yyyy-MM-dd ").format(date)),
+                  new Text(DateFormat("HH-mm").format(date)),
                 ],
               ),
             ),

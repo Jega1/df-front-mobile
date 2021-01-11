@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-Color primaryColor = const Color(
-    0xFF4798FC); //edb256//#EC9259//(0xFFedb256//EC9259//fc8c4c//056ea6
-Color secondColor = const Color(0xFFfc9c60);
-Color thirdColor = const Color(0xFFFC6353);
+//Color primaryColor = const Color(0xFF004d4f); //ffca75//7ccdc7
+//Color primaryColor = const Color(0xFF7ccdc7); //ffca75//7ccdc7//e87833
+Color primaryColor = const Color(0xFFe87833);
+Color secondColor = const Color(0xFF13989c);
+Color thirdColor = const Color(0xFF55a5ed);
 Color pinkLight = const Color(0xffEDE4EF);
 Color pinkDark = const Color(0xFFF58524);
 Color paleGreen = const Color(0xFF79FCB6);

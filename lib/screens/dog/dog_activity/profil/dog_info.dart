@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../appColors.dart';
+import 'documents/doc.dart';
 import 'documents/photo.dart';
 import 'dog_edit.dart';
 
@@ -197,7 +198,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PhotoScreen(),
+                  builder: (context) => DocScreen(),
                 ));
           } else {
             index == 1

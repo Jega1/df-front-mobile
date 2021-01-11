@@ -205,43 +205,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
 
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: _selectedUser == "Veterinaire"
-                //       ? TextFormField(
-                //           validator: requiredValidator,
-                //           onSaved: (val) {
-                //             userModel.addressCabinet = val;
-                //           },
-                //           decoration: InputDecoration(
-                //               labelText: 'adresse',
-                //               contentPadding: new EdgeInsets.symmetric(
-                //                   vertical: 20.0, horizontal: 20.0),
-                //               border: OutlineInputBorder(
-                //                   borderRadius: BorderRadius.circular(5.0))),
-                //           //controller: ,
-                //         )
-                //       : SizedBox.shrink(),
-                // ),
-
-                // _selectedUser == "Veterinaire"
-                //     ? Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: TextFormField(
-                //           validator: requiredValidator,
-                //           onSaved: (val) {
-                //             userModel.code_postal = val;
-                //           },
-                //           decoration: InputDecoration(
-                //               labelText: 'code postal',
-                //               contentPadding: new EdgeInsets.symmetric(
-                //                   vertical: 20.0, horizontal: 20.0),
-                //               border: OutlineInputBorder(
-                //                   borderRadius: BorderRadius.circular(5.0))),
-                //         ),
-                //       )
-                //     : SizedBox.shrink(),
-
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Container(

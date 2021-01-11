@@ -9,6 +9,7 @@ import 'package:dog_face/screens/appoint/list_appoint.dart';
 import 'package:dog_face/screens/user/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:intl/intl.dart';
 
 import '../../appColors.dart';
 
@@ -59,6 +60,9 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
           child: Column(
             children: <Widget>[
               Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset('assets/vet-dog.jpg')),
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: <Widget>[
@@ -100,7 +104,8 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                     ),
                     SizedBox(width: 30),
                     Text(
-                      widget.time.time,
+                      DateFormat("yyyy-MM-dd ")
+                          .format(DateTime.parse(widget.time.time)),
                       style: TextStyle(fontSize: 18, color: lightBlack),
                     ),
                   ],
@@ -116,7 +121,8 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                     ),
                     SizedBox(width: 30),
                     Text(
-                      widget.time.time,
+                      DateFormat("HH-mm ")
+                          .format(DateTime.parse(widget.time.time)),
                       style: TextStyle(fontSize: 18, color: lightBlack),
                     ),
                   ],
@@ -138,28 +144,29 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(width: 1.0, color: Colors.grey[400]),
                       ),
-                      child: DropdownButton(
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                          color: primaryColor,
-                          size: 36,
-                        ),
-                        isExpanded: true,
-                        hint:
-                            Text('Select a dog'), // Not necessary for Option 1
-                        value: _selectedDog,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedDog = newValue;
-                            // _selectedDogId = newValue.idDog;
-                          });
-                        },
-                        items: dogs.map((dog) {
-                          return DropdownMenuItem(
-                              child: new Text(dog.firstname),
-                              value: dog.firstname);
-                        }).toList(),
-                      ),
+
+                      // child: DropdownButton(
+                      //   icon: Icon(
+                      //     Icons.arrow_drop_down,
+                      //     color: primaryColor,
+                      //     size: 36,
+                      //   ),
+                      //   isExpanded: true,
+                      //   hint:
+                      //       Text('Select a dog'), // Not necessary for Option 1
+                      //   value: _selectedDog,
+                      //   onChanged: (newValue) {
+                      //     setState(() {
+                      //       _selectedDog = newValue;
+                      //       // _selectedDogId = newValue.idDog;
+                      //     });
+                      //   },
+                      //   items: dogs.map((dog) {
+                      //     return DropdownMenuItem(
+                      //         child: new Text(dog.firstname),
+                      //         value: dog.firstname);
+                      //   }).toList(),
+                      // ),
                     ),
                   ],
                 ),

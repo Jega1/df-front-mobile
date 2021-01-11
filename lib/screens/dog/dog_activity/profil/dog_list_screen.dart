@@ -99,7 +99,10 @@ class _DogListScreenState extends State<DogListScreen> {
           });
 
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => DogInfoScreen()));
+              .push(MaterialPageRoute(builder: (_) => DogInfoScreen()))
+              .then((val) {
+            getData();
+          });
         },
         child: Row(
           children: [
@@ -112,6 +115,7 @@ class _DogListScreenState extends State<DogListScreen> {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: shadowList,
                       image: DecorationImage(
+                        fit: BoxFit.cover,
                         image: item.img.length != 0
                             ? NetworkImage(
                                 item.img[0]["dog_image"],
