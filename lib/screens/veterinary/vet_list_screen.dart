@@ -66,11 +66,10 @@ class _VetListScreenState extends State<VetListScreen> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color:
-                                                primaryColor.withOpacity(0.1)),
+                                            color: thirdColor.withOpacity(0.2)),
                                         child: ListTile(
-                                          leading: Image.asset(
-                                              'assets/images/logo.jpg'),
+                                          leading:
+                                              Image.asset('assets/doct.png'),
                                           title: Text(
                                             'Dr. ' + allvet[index]["username"],
                                             style: TextStyle(
@@ -82,7 +81,7 @@ class _VetListScreenState extends State<VetListScreen> {
                                             allvet[index]["address"],
                                             style: TextStyle(
                                                 color: titleTextColor
-                                                    .withOpacity(0.7)),
+                                                    .withOpacity(0.4)),
                                           ),
                                         ),
                                       ),

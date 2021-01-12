@@ -40,7 +40,7 @@ class _VetAvailableState extends State<VetAvailable> {
                 )
               : GridView.count(
                   primary: true,
-                  crossAxisCount: 3,
+                  crossAxisCount: 2,
                   childAspectRatio: 0.99,
                   children: List.generate(times.length, (index) {
                     return InkWell(
@@ -90,12 +90,29 @@ class _VetAvailableState extends State<VetAvailable> {
           verticalDirection: VerticalDirection.down,
           children: <Widget>[
             new Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(top: 40.0),
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Text(DateFormat("yyyy-MM-dd ").format(date)),
-                  new Text(DateFormat("HH-mm").format(date)),
+                  new Text(
+                    // import 'package:intl/date_symbol_data_file.dart';
+                    // initializeDateFormatting('de_DE', null).then((_) => runMyCode());
+                    // DateFormat("EEE, MMM d, '  ' yyyy ").format(date),
+                    DateFormat("EEE ").format(date),
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  new Text(
+                    // import 'package:intl/date_symbol_data_file.dart';
+                    // initializeDateFormatting('de_DE', null).then((_) => runMyCode());
+                    // DateFormat("EEE, MMM d, '  ' yyyy ").format(date),
+                    DateFormat("dd/MM/ yyyy ").format(date),
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  new Text(
+                    DateFormat("HH.mm").format(date),
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ],
               ),
             ),

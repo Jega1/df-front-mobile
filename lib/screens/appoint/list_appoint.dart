@@ -2,8 +2,11 @@ import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/models/time.dart';
+import 'package:dog_face/screens/dog/dog_activity/profil/dog_list_screen.dart';
 import 'package:dog_face/screens/user/user_dashboard.dart';
+import 'package:dog_face/screens/veterinary/vet_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../appColors.dart';
 
@@ -48,12 +51,14 @@ class _AppointListScreenState extends State<AppointListScreen> {
                       },
                       child: Card(
                         child: ListTile(
-                          title: Text(
-                            allConsult[index]["username"].toString(),
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w500,
-                                color: primaryColor),
+                          title: Container(
+                            child: Text(
+                              allConsult[index]["firstname"].toString(),
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500,
+                                  color: primaryColor),
+                            ),
                           ),
                           leading:
                               Icon(Icons.broken_image, color: primaryColor),
@@ -61,7 +66,7 @@ class _AppointListScreenState extends State<AppointListScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                allConsult[index]["code_postal"].toString(),
+                                allConsult[index]["race"].toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
@@ -107,6 +112,69 @@ class _AppointListScreenState extends State<AppointListScreen> {
                       ),
                     );
                   }),
+
+/////
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: lightGrey,
+        currentIndex: 0, // this will be set when a new tab is tapped
+        onTap: (int index) {
+          if (index == 0) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DogListScreen(),
+                ));
+          } else {
+            index == 1
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VetListScreen(),
+                    ),
+                  )
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppointListScreen(),
+                    ));
+          }
+          ;
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(
+              FontAwesomeIcons.paw,
+              color: lightBlack,
+              size: 30,
+            ),
+            title: new Text(
+              'Mes chiens',
+              style: TextStyle(color: lightBlack, fontSize: 20),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(
+              FontAwesomeIcons.hospitalUser,
+              color: lightBlack,
+              size: 30,
+            ),
+            title: new Text(
+              'Mes vetos',
+              style: TextStyle(color: lightBlack, fontSize: 20),
+            ),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.appStoreIos,
+                color: lightBlack,
+                size: 30,
+              ),
+              title: Text(
+                'Mes rdv',
+                style: TextStyle(color: lightBlack, fontSize: 20),
+              ))
+        ],
+      ),
     );
   }
 
@@ -137,22 +205,24 @@ class _AppointListScreenState extends State<AppointListScreen> {
               FlatButton(
                   onPressed: () async {
                     Map data = {
-                      "id_available": allConsult[index]["id_available"],
+                      "id_appointment": allConsult[index]["id_appointment"],
                     };
                     print("data");
                     await RestDatasourceP()
                         .cancelAppointApi(data: data)
                         .whenComplete(() {
-                      setState(() async {
-                        await getData();
-                        //Show allert dialog delete succes
+                      setState(() {
+                        getData();
+                        // Show allert dialog delete succes
                         //    Get.snakebar();
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => UserDashboard(),
-                          ),
-                          (Route<dynamic> route) => false,
-                        );
+                        // Navigator.of(context).pushAndRemoveUntil(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => UserDashboard(),
+                        //   ),
+                        //   (Route<dynamic> route) => false,
+                        // );
+
+                        Navigator.pop(context);
                       });
                     });
 

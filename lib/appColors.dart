@@ -6,9 +6,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 Color primaryColor = const Color(0xFFe87833);
 Color secondColor = const Color(0xFF13989c);
 Color thirdColor = const Color(0xFF55a5ed);
+Color darkBrown = const Color(0xFF4f2105);
 Color pinkLight = const Color(0xffEDE4EF);
 Color pinkDark = const Color(0xFFF58524);
-Color paleGreen = const Color(0xFF79FCB6);
+
 Color titleTextColor = const Color(0xff1E1C61);
 Color darkOrange = const Color(0xffEC9259);
 Color darkRed = const Color(0xff8B0000);

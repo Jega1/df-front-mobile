@@ -4,7 +4,7 @@ import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/tap.dart';
 import 'package:dog_face/screens/dog/dog_activity/profil/documents/photoDialog.dart';
-import 'package:dog_face/screens/dog/dog_activity/training/trainning.dart';
+import 'package:dog_face/screens/dog/dog_activity/training/package.dart';
 import 'package:dog_face/widget/photo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -210,7 +210,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
                 : Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TrainingStartScreen(),
+                      builder: (context) => PackageScreen(),
                     ),
                   );
           }

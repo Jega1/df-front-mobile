@@ -104,7 +104,7 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                     ),
                     SizedBox(width: 30),
                     Text(
-                      DateFormat("yyyy-MM-dd ")
+                      DateFormat("dd-MM-yyyy ")
                           .format(DateTime.parse(widget.time.time)),
                       style: TextStyle(fontSize: 18, color: lightBlack),
                     ),
@@ -121,7 +121,7 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                     ),
                     SizedBox(width: 30),
                     Text(
-                      DateFormat("HH-mm ")
+                      DateFormat("HH.mm ")
                           .format(DateTime.parse(widget.time.time)),
                       style: TextStyle(fontSize: 18, color: lightBlack),
                     ),
@@ -144,29 +144,28 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(width: 1.0, color: Colors.grey[400]),
                       ),
-
-                      // child: DropdownButton(
-                      //   icon: Icon(
-                      //     Icons.arrow_drop_down,
-                      //     color: primaryColor,
-                      //     size: 36,
-                      //   ),
-                      //   isExpanded: true,
-                      //   hint:
-                      //       Text('Select a dog'), // Not necessary for Option 1
-                      //   value: _selectedDog,
-                      //   onChanged: (newValue) {
-                      //     setState(() {
-                      //       _selectedDog = newValue;
-                      //       // _selectedDogId = newValue.idDog;
-                      //     });
-                      //   },
-                      //   items: dogs.map((dog) {
-                      //     return DropdownMenuItem(
-                      //         child: new Text(dog.firstname),
-                      //         value: dog.firstname);
-                      //   }).toList(),
-                      // ),
+                      child: DropdownButton(
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: primaryColor,
+                          size: 36,
+                        ),
+                        isExpanded: true,
+                        hint:
+                            Text('Select a dog'), // Not necessary for Option 1
+                        value: _selectedDog,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedDog = newValue;
+                            // _selectedDogId = newValue.idDog;
+                          });
+                        },
+                        items: dogs.map((dog) {
+                          return DropdownMenuItem(
+                              child: new Text(dog.firstname),
+                              value: dog.firstname);
+                        }).toList(),
+                      ),
                     ),
                   ],
                 ),

@@ -4,6 +4,8 @@ import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/vaccin/edit_vaccin.dart';
 import 'package:flutter/material.dart';
 import 'package:dog_face/api/http_req_get.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../../../appColors.dart';
 import 'add_vaccin.dart';
 
 class ListVaccin extends StatefulWidget {
@@ -44,17 +46,31 @@ class _ListVaccinState extends State<ListVaccin> {
                             builder: (_) => EditVaccinScreen(MedicalModel)));
                       },
                       child: ListTile(
-                        title: Text(vaccins[index].name),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(vaccins[index].firstDate),
-                            Text(vaccins[index].nextDate),
-                          ],
-                        ),
-                        leading: Icon(Icons.info_outline),
-                        trailing: Text(vaccins[index].firstDate),
-                      ),
+                          title: Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 10.0, top: 10),
+                            child: Text(vaccins[index].name),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(vaccins[index].firstDate),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(vaccins[index].nextDate),
+                            ],
+                          ),
+                          trailing: Icon(
+                            Icons.delete_sweep,
+                            color: red,
+                            size: 20,
+                          ),
+                          leading: Icon(
+                            FontAwesomeIcons.closedCaptioning,
+                            color: darkBrown,
+                            size: 30,
+                          )),
                     );
                   },
                 ),

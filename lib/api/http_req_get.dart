@@ -115,9 +115,7 @@ class RestDatasourceGet {
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
     );
     Map res = jsonDecode(response.body);
-    print('jrrrffffdthrrrrrr');
     print(res);
-    print('jrrrrrrdddddrrr');
     return res;
   }
 
@@ -128,9 +126,7 @@ class RestDatasourceGet {
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
     );
     Map res = jsonDecode(response.body);
-    print('jrrrrrrrrr');
     print(res);
-    print('jrrrrrrrrr');
     return res;
   }
 
