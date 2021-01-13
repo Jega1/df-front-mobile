@@ -82,7 +82,6 @@ class _UserEditState extends State<UserEdit> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    validator: EmailValidator(errorText: "format not valide"),
                     decoration: InputDecoration(
                         labelText: 'Telephone',
                         contentPadding: new EdgeInsets.symmetric(
@@ -198,7 +197,7 @@ class _UserEditState extends State<UserEdit> {
     addressCtl.text = res["message"][0]["address"];
     codePostalCtl.text = res["message"][0]["code_postal"];
     villeCtl.text = res["message"][0]["ville"];
-    telephoneCtl.text = res["message"][0]["telephone"];
+    telephoneCtl.text = res["message"][0]["telephone"].toString();
 
     setState(() {
       isLoading = false;

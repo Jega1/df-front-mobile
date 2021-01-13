@@ -66,7 +66,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
               ),
               Expanded(
                 child: Container(
-                  color: primaryColor,
+                  color: primaryColor.withOpacity(0.6),
                 ),
               )
             ],
@@ -77,7 +77,7 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
               alignment: Alignment.bottomRight,
               child: Column(
                 children: <Widget>[
-                  Hero(tag: 1, child: Image.asset('logo.png')),
+                  Hero(tag: 1, child: Image.asset('assets/logo.jpg')),
                   GestureDetector(
                     onTap: () {
                       showSelectionDialog(

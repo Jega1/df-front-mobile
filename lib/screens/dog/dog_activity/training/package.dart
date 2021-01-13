@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/models/package.dart';
-import 'package:dog_face/screens/dog/dog_activity/training/lesson.dart';
+import 'package:dog_face/screens/dog/dog_activity/training/lesson_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,14 +34,16 @@ class _PackageScreenState extends State<PackageScreen> {
           : Center(
               child: CarouselSlider(
                 options:
-                    CarouselOptions(height: 400.0, enlargeCenterPage: true),
+                    CarouselOptions(height: 600.0, enlargeCenterPage: true),
                 items: packages.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => LessonScreen()));
+                              builder: (_) => LessonScreen(
+                                    id: i.idPackage,
+                                  )));
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -58,13 +60,9 @@ class _PackageScreenState extends State<PackageScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    i.description,
-                                    style:
-                                        TextStyle(fontSize: 18.0, color: white),
-                                  ),
-                                ),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child:
+                                        Image.asset('assets/dog-face-5.png')),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(

@@ -34,14 +34,14 @@ class _VetDashboardScreenState extends State<VetDashboardScreen> {
         actions: <Widget>[signOut()],
       ),
       body: Center(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => AppointVetScreen()));
-        },
-        child: Icon(Icons.add),
-        //  backgroundColor: primaryColor,
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.of(context)
+      //         .push(MaterialPageRoute(builder: (_) => AppointVetScreen()));
+      //   },
+      //   child: Icon(Icons.add),
+      //   //  backgroundColor: primaryColor,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0, // this will be set when a new tab is tapped
         onTap: (int index) {

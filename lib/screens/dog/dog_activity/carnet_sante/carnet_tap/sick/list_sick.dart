@@ -39,7 +39,7 @@ class _ListSickState extends State<ListSick> {
                         setState(() {});
 
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => EditVaccinScreen(MedicalModel)));
+                            builder: (_) => EditVaccinScreen(sicks[index])));
                       },
                       child: ListTile(
                         title: Text(sicks[index].name),

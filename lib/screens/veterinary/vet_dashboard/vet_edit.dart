@@ -82,18 +82,6 @@ class _VetEditState extends State<VetEdit> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: 'password',
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 20.0, horizontal: 20.0),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0))),
-                    controller: passwordCtl,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
                         labelText: 'address cabinet',
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 20.0, horizontal: 20.0),
@@ -174,10 +162,11 @@ class _VetEditState extends State<VetEdit> {
     setState(() {
       isLoading = true;
     });
-    Map res = await RestDatasourceGet().getVetById(id: SharedPrefData().userId);
-    addressCtl.text = res["message"][0]["address"];
-    codePostalCtl.text = res["message"][0]["code_postal"];
-    villeCtl.text = res["message"][0]["ville"];
+    Map res =
+        await RestDatasourceGet().getUserById(id: SharedPrefData().userId);
+    addressCtl.text = res["message"]["address"];
+    codePostalCtl.text = res["message"]["code_postal"];
+    villeCtl.text = res["message"]["ville"];
 
     setState(() {
       isLoading = false;

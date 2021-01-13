@@ -49,7 +49,7 @@ class _DocScreenState extends State<DocScreen> {
 
   Widget buildGridView() {
     return GridView.count(
-      crossAxisCount: 3,
+      crossAxisCount: 2,
       children: List.generate(
         allImages.length,
         (index) {

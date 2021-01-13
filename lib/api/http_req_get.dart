@@ -17,7 +17,7 @@ class RestDatasourceGet {
   }
 
   Future getVetById({int id}) async {
-    String url = baseurl + "user/vet/$id";
+    String url = baseurl + "user/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},
@@ -156,6 +156,28 @@ class RestDatasourceGet {
   //TRAINING
   getAllPack() async {
     String url = baseurl + "pack/";
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+    );
+    Map res = jsonDecode(response.body);
+    print(res);
+    return res;
+  }
+
+  getAllLessonByPackId({int id}) async {
+    String url = baseurl + "pack/$id";
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: "application/json"},
+    );
+    Map res = jsonDecode(response.body);
+    print(res);
+    return res;
+  }
+
+  getAllStepsByLessonId({int id}) async {
+    String url = baseurl + "lesson/$id";
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.contentTypeHeader: "application/json"},

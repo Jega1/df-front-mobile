@@ -1,13 +1,16 @@
 import 'package:dog_face/api/http_req_get.dart';
+import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/vaccin.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../appColors.dart';
+import '../../../../../../main.dart';
+import '../tap.dart';
 
 class EditVaccinScreen extends StatefulWidget {
-  final MedicalModel;
-  EditVaccinScreen(this.MedicalModel);
+  MedicalModel medicalModel;
+  EditVaccinScreen(this.medicalModel);
 
   @override
   _EditVaccinScreenState createState() => _EditVaccinScreenState();
@@ -21,7 +24,7 @@ class _EditVaccinScreenState extends State<EditVaccinScreen> {
   TextEditingController observationCtl = TextEditingController();
 
   DateTime now = DateTime.now();
-  List<VaccinModel> vaccins = [];
+  List<MedicalModel> vaccins = [];
   List<MedicalModel> medicals = [];
   bool isLoading = false;
   String selectedVaccin = '';
@@ -58,10 +61,45 @@ class _EditVaccinScreenState extends State<EditVaccinScreen> {
     }
   }
 
+  Future<Null> _selectNextDate(BuildContext context) async {
+    DateTime _selDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2050),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            backgroundColor: pinkDark,
+            primaryColor: primaryColor,
+            accentColor: primaryColor,
+            colorScheme: ColorScheme.light(primary: primaryColor),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child,
+        );
+      },
+    );
+    if (_selDate != null) {
+      setState(() {
+        now = _selDate;
+        convertedDate = "${now.day.toString().padLeft(2, '0')}/"
+            "${now.month.toString().padLeft(2, '0')}/"
+            "${now.year.toString()}   ";
+
+        nextDateCtl.text = convertedDate;
+      });
+    }
+  }
+
   void initState() {
     super.initState();
 
-    //nameCtl.text = widget.MedicalModel.name;
+    nameCtl.text = widget.medicalModel.name;
+    nameCtl.text = widget.medicalModel.name;
+    firstDateCtl.text = widget.medicalModel.firstDate;
+    nextDateCtl.text = widget.medicalModel.nextDate;
+    observationCtl.text = widget.medicalModel.observation;
   }
 
   @override
@@ -155,7 +193,7 @@ class _EditVaccinScreenState extends State<EditVaccinScreen> {
                 padding: const EdgeInsets.all(4.0),
                 child: GestureDetector(
                   onTap: () {
-                    _selectDate(context);
+                    _selectNextDate(context);
                   },
                   child: Column(
                     children: <Widget>[
@@ -188,7 +226,7 @@ class _EditVaccinScreenState extends State<EditVaccinScreen> {
                                 Border.all(width: 1.0, color: Colors.grey[400]),
                           ),
                           child: Text(
-                            firstDateCtl.text,
+                            nextDateCtl.text,
                             style: TextStyle(
                               fontSize: 18,
                             ),
@@ -210,6 +248,44 @@ class _EditVaccinScreenState extends State<EditVaccinScreen> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        // Color.fromRGBO(143, 148,251,.1),
+                        Color.fromRGBO(0, 191, 255, .6),
+                        Color.fromRGBO(0, 191, 255, .9),
+                      ])),
+                  child: FlatButton(
+                      padding: EdgeInsets.only(
+                          left: 50, top: 10, right: 50, bottom: 10),
+                      onPressed: () async {
+                        widget.medicalModel.idDog = currentDog.idDog;
+                        widget.medicalModel.name = nameCtl.text;
+                        widget.medicalModel.firstDate = firstDateCtl.text;
+                        widget.medicalModel.nextDate = nextDateCtl.text;
+                        widget.medicalModel.observation = observationCtl.text;
+                        widget.medicalModel.typeMedical = 1;
+                        await RestDatasourceP()
+                            .medicalEditApi(
+                          medicalModel: widget.medicalModel,
+                          id: widget.medicalModel.idMedical,
+                        )
+                            .then((onValue) {
+                          Navigator.pop(context);
+                          // Navigator.pop(context);
+                          // Navigator.pushReplacement(context,
+                          //     MaterialPageRoute(builder: (_) => TapScreen()));
+                        });
+                      },
+                      child: new Text(
+                        "Register",
+                        style: TextStyle(fontSize: 20, fontFamily: "Arial"),
+                      )),
+                ),
+              ),
             ],
           ),
         ),
@@ -217,23 +293,22 @@ class _EditVaccinScreenState extends State<EditVaccinScreen> {
     );
   }
 
-  // void getData() async {
-  //   vaccins = [];
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   await RestDatasourceGet()
-  //       .getAllVaccinsByDog(id: currentDog.idDog)
-  //       .then((val) {
-  //     List temp = val["data"];
-  //     print(temp);
-  //     temp.forEach((vaccinData) {
-  //       vaccins.add(MedicalModel.fromJson(vaccinData));
-  //     });
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   });
-  // }
-
+  void getData() async {
+    vaccins = [];
+    setState(() {
+      isLoading = true;
+    });
+    await RestDatasourceGet()
+        .getAllVaccinsByDog(id: currentDog.idDog)
+        .then((val) {
+      List temp = val["data"];
+      print(temp);
+      temp.forEach((vaccinData) {
+        vaccins.add(MedicalModel.fromJson(vaccinData));
+      });
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 }

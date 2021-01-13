@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dog_face/datas/sharedPref.dart';
+import 'package:dog_face/main.dart';
 import 'package:dog_face/models/dog.dart';
 import 'package:dog_face/models/medical.dart';
 import 'package:dog_face/models/user.dart';
@@ -74,7 +75,7 @@ class RestDatasourceP {
           "password": password,
           "is_veterinay": SharedPrefData().isVet,
           "address": address,
-          "codePostal": codePostal,
+          "code_postal": codePostal,
           "ville": ville,
           "telephone": telephone,
         }),
@@ -135,6 +136,23 @@ class RestDatasourceP {
     print(res);
   }
 
+  Future medicalEditApi({int id, MedicalModel medicalModel}) async {
+    String url = baseurl + "medical/edit-medical/$id";
+    http.Response response = await http.put(url,
+        body: jsonEncode(medicalModel.toJson()),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
+
+  Future medicalDeleteApi({int id}) async {
+    String url = baseurl + "medical/$id";
+    http.Response response = await http
+        .put(url, headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
+
 //APPOINTMENT
 
   Future takeAppointApi({Map data}) async {
@@ -151,6 +169,21 @@ class RestDatasourceP {
     print(data);
     http.Response response = await http.post(url,
         body: jsonEncode(data),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
+
+  Future trainingStartApi(
+      {int id_dog, int id_lesson, int id_status, String note}) async {
+    String url = baseurl + "trainning";
+    http.Response response = await http.post(url,
+        body: jsonEncode({
+          "id_dog": currentDog.idDog,
+          "id_lesson": id_lesson,
+          "id_staus": id_status,
+          "note": note
+        }),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});
     Map res = jsonDecode(response.body);
     print(res);

@@ -42,8 +42,37 @@ class _ListVaccinState extends State<ListVaccin> {
                       onTap: () async {
                         setState(() {});
 
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => EditVaccinScreen(MedicalModel)));
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Container(
+                            height: 400,
+                            child: Column(
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: (_) => EditVaccinScreen(
+                                                vaccins[index])))
+                                        .then((cal) {
+                                      getData();
+                                    });
+                                  },
+                                  child: Row(
+                                    children: <Widget>[Text("edit")],
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: Row(
+                                    children: <Widget>[Text("delete")],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
                       },
                       child: ListTile(
                           title: Padding(
