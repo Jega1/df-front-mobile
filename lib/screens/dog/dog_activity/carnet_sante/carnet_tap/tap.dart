@@ -1,7 +1,9 @@
 import 'package:dog_face/screens/dog/dog_activity/carnet_sante/carnet_tap/sick/list_sick.dart';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../appColors.dart';
 import 'vaccin/list_vaccin.dart';
 
 class TapScreen extends StatefulWidget {
@@ -23,12 +25,28 @@ class _TapScreenState extends State<TapScreen> {
             indicatorWeight: 2,
             tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.details),
-                text: ("Vaccin"),
+                icon: Column(
+                  children: <Widget>[
+                    new Icon(
+                      FontAwesomeIcons.syringe,
+                      color: white,
+                      size: 30,
+                    ),
+                    Text('Vaccin')
+                  ],
+                ),
               ),
               Tab(
-                icon: Icon(Icons.category),
-                text: ("Traitement"),
+                icon: Column(
+                  children: <Widget>[
+                    new Icon(
+                      FontAwesomeIcons.stethoscope,
+                      color: white,
+                      size: 30,
+                    ),
+                    Text('Traitement')
+                  ],
+                ),
               ),
               // Tab(
               //   icon: Icon(Icons.stars),

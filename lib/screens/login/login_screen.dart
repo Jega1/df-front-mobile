@@ -41,8 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       bottomRight: const Radius.circular(30),
                     ),
                     gradient: LinearGradient(colors: [
-                      Color.fromRGBO(252, 140, 76, .9),
-                      Color.fromRGBO(122, 135, 238, .9),
+                      Color.fromRGBO(232, 120, 51, .9),
+                      Color.fromRGBO(0, 77, 79, .7),
                     ])),
               ),
             ),

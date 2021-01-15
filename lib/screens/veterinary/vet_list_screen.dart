@@ -66,7 +66,8 @@ class _VetListScreenState extends State<VetListScreen> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color: thirdColor.withOpacity(0.2)),
+                                            color:
+                                                secondColor.withOpacity(0.3)),
                                         child: ListTile(
                                           leading:
                                               Image.asset('assets/doct.png'),

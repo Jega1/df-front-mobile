@@ -4,12 +4,15 @@ import 'package:dog_face/datas/sharedPref.dart';
 import 'package:dog_face/main.dart';
 import 'package:dog_face/models/dog.dart';
 import 'package:dog_face/models/medical.dart';
+import 'package:dog_face/models/training.dart';
 import 'package:dog_face/models/user.dart';
 
 import 'package:http/http.dart' as http;
 
 String baseurl = "http://10.0.2.2:8000/api/";
 //String baseurl = "http://51.38.51.35:8000/api/";
+//String baseurl = "https://dogface-backend.herokuapp.com/api";
+//String baseurl = "https://facedog.herokuapp.com/api";
 
 class RestDatasourceP {
 //USER
@@ -47,7 +50,7 @@ class RestDatasourceP {
     http.Response response = await http.post(url,
         body: jsonEncode(data),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});
-    Map res = jsonDecode(response.body);
+    Map res = await jsonDecode(response.body);
     print(res);
     return res;
   }
@@ -189,32 +192,36 @@ class RestDatasourceP {
     print(res);
   }
 
-//
+  trainingRegisterApi({
+    int dogId,
+    int idLesson,
+  }) async {
+    String url = baseurl + "trainning";
+    http.Response response = await http.post(url,
+        body: jsonEncode({
+          "id_dog": dogId,
+          "id_lesson": idLesson,
+          "status": 1,
+        }),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
 
-  // Future editUsereeeeeee(
-  //     {int id,
-  //     String username,
-  //     String email,
-  //     String password,
-  //     String address_cabinet,
-  //     String code_postal,
-  //     String ville}) async {
-  //   String url = baseurl + "user/$id";
-  //   http.Response response = await http.put(
-  //     url,
-  //     body: jsonEncode({
-  //       "username": username,
-  //       "email": email,
-  //       "password": password,
-  //       "is_veterinay": SharedPrefData().isVet,
-  //       "address_cabinet": address_cabinet,
-  //       "code_postal": code_postal,
-  //       "ville": ville,
-  //     }),
-  //     headers: {HttpHeaders.contentTypeHeader: "application/json"},
-  //   );
-  //   Map res = jsonDecode(response.body);
-  //   print(res);
-  //   return res;
-  // }
+  trainingCompleteApi({
+    idTraining,
+    int dogId,
+    int idLesson,
+  }) async {
+    String url = baseurl + "trainning/$idTraining";
+    http.Response response = await http.put(url,
+        body: jsonEncode({
+          "id_dog": dogId,
+          "id_lesson": idLesson,
+          "id_status": 0,
+        }),
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
 }

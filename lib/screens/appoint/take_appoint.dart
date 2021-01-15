@@ -249,7 +249,8 @@ class _TakeAppointScreenState extends State<TakeAppointScreen> {
                       },
                       child: new Text(
                         "Confirmez",
-                        style: TextStyle(fontSize: 20, fontFamily: "Arial"),
+                        style: TextStyle(
+                            fontSize: 20, fontFamily: "Arial", color: white),
                       )),
                 ),
               ),

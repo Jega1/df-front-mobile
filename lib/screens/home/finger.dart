@@ -46,9 +46,7 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
                     ),
                     gradient: LinearGradient(colors: [
                       Color.fromRGBO(232, 120, 51, .9),
-                      //  Color.fromRGBO(79, 33, 5, .9), //darkmarron
-                      // Color.fromRGBO(0, 77, 79, .9), //bluergb(85, 165, 237)
-                      Color.fromRGBO(85, 165, 237, .9)
+                      Color.fromRGBO(0, 77, 79, .7),
                     ])),
               ),
             ),
@@ -137,10 +135,8 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
                   child: Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
-                      //  Color.fromRGBO(0,	92,	63, .9),
-                      Color.fromRGBO(122, 12, 40, .9),
-                      // Color.fromRGBO(	255,	99,	97,  .9),
-                      Color.fromRGBO(2, 24, 101, .9),
+                      Color.fromRGBO(232, 120, 51, .9),
+                      Color.fromRGBO(0, 77, 79, .7),
                     ])),
                     child: Icon(
                       Icons.fingerprint,
@@ -178,8 +174,8 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
             borderRadius: BorderRadius.circular(30),
             gradient: LinearGradient(colors: [
               Color.fromRGBO(186, 70, 88, .9),
-              // Color.fromRGBO(	255,	99,	97,  .9),
               Color.fromRGBO(0, 77, 79, .9),
+              //Color.fromRGBO(19, 152, 156, .1),#004D4F
             ])),
         child: new Text('Inscrivez - vous',
             textAlign: TextAlign.center,
@@ -228,8 +224,6 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
     if (!mounted) return;
 
     final String message = authenticated ? 'Authorized' : 'Not Authorized';
-    setState(() {
-      // _authorized = message;
-    });
+    setState(() {});
   }
 }

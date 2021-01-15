@@ -63,10 +63,10 @@ class _LessonScreenState extends State<LessonScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: titleTextColor),
                 ),
-                subtitle: Text(
-                  model.descriptionLesson,
-                  style: TextStyle(color: titleTextColor.withOpacity(0.4)),
-                ),
+                // subtitle: Text(
+                //   model.descriptionLesson,
+                //   style: TextStyle(color: titleTextColor.withOpacity(0.4)),
+                // ),
               ),
             ),
           ),

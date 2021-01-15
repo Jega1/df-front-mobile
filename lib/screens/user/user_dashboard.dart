@@ -50,7 +50,7 @@ class _UserDashboardState extends State<UserDashboard> {
                         //       'https://www.woolha.com/media/2020/03/eevee.png'),
                         // ),
                         Text(
-                          "Mes dogs",
+                          "",
                           style: TextStyle(color: secondColor, fontSize: 20),
                         )
                       ],
@@ -60,7 +60,7 @@ class _UserDashboardState extends State<UserDashboard> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: new AssetImage('assets/dogs.jpg'),
+                      image: new AssetImage('assets/dog-face-10.png'),
                       fit: BoxFit.fill,
                     ),
                     color: white,
@@ -98,7 +98,7 @@ class _UserDashboardState extends State<UserDashboard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Mes veterinaires",
+                            "",
                             style: TextStyle(color: secondColor, fontSize: 20),
                           )
                         ],
@@ -108,7 +108,7 @@ class _UserDashboardState extends State<UserDashboard> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: new AssetImage('assets/doctors.png'),
+                        image: new AssetImage('assets/dog-face-11.png'),
                         fit: BoxFit.fill,
                       ),
                       color: white,
@@ -138,7 +138,7 @@ class _UserDashboardState extends State<UserDashboard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Mes RDV",
+                          "",
                           style: TextStyle(color: secondColor, fontSize: 20),
                         )
                       ],

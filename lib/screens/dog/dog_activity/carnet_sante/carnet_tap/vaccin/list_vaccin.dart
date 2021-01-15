@@ -33,7 +33,7 @@ class _ListVaccinState extends State<ListVaccin> {
             )
           : vaccins.length == 0
               ? Center(
-                  child: Text("Ajouter votre chien"),
+                  child: Text("Ajouter les"),
                 )
               : ListView.builder(
                   itemCount: vaccins.length,
@@ -75,35 +75,36 @@ class _ListVaccinState extends State<ListVaccin> {
                         );
                       },
                       child: ListTile(
-                          title: Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: 10.0, top: 10),
-                            child: Text(vaccins[index].name),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(vaccins[index].firstDate),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(vaccins[index].nextDate),
-                            ],
-                          ),
-                          trailing: Icon(
-                            Icons.delete_sweep,
-                            color: red,
-                            size: 20,
-                          ),
-                          leading: Icon(
-                            FontAwesomeIcons.closedCaptioning,
-                            color: darkBrown,
-                            size: 30,
-                          )),
+                        title: Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0, top: 10),
+                          child: Text(vaccins[index].name),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(vaccins[index].firstDate),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(vaccins[index].nextDate),
+                          ],
+                        ),
+                        trailing: Icon(
+                          Icons.delete_sweep,
+                          color: red,
+                          size: 20,
+                        ),
+                        leading: Icon(
+                          FontAwesomeIcons.syringe,
+                          color: white,
+                          size: 10,
+                        ),
+                      ),
                     );
                   },
                 ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
         onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => AddVaccin()))

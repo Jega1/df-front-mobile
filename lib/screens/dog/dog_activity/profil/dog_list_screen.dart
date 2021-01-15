@@ -120,7 +120,7 @@ class _DogListScreenState extends State<DogListScreen> {
                             ? NetworkImage(
                                 item.img[0]["dog_image"],
                               )
-                            : AssetImage('assets/logo.jpg'),
+                            : AssetImage('assets/sh.png'),
                       ),
                     ),
                     margin: EdgeInsets.only(top: 50),
@@ -138,7 +138,9 @@ class _DogListScreenState extends State<DogListScreen> {
                       topRight: Radius.circular(20),
                       bottomRight: Radius.circular(20))),
               child: Column(
-                children: <Widget>[],
+                children: <Widget>[
+                  Text(item.firstname),
+                ],
               ),
             ))
           ],

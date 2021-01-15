@@ -1,6 +1,10 @@
 import 'package:dog_face/api/http_req_get.dart';
+import 'package:dog_face/api/http_req_post.dart';
+import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/appColors.dart';
+import 'package:dog_face/main.dart';
 import 'package:dog_face/models/step.dart';
+import 'package:dog_face/models/training.dart';
 import 'package:flutter/material.dart';
 
 class StepScreen extends StatefulWidget {
@@ -15,7 +19,9 @@ class _StepScreenState extends State<StepScreen> {
   bool isLoading = false;
   List allSteps = [];
   List<StepsModel> steps = [];
+  ScrollController scrollController = ScrollController();
 
+  List trainings = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -29,37 +35,108 @@ class _StepScreenState extends State<StepScreen> {
       appBar: AppBar(title: Text('steps demo')),
       body: isLoading
           ? Center()
-          : Container(
-              height: MediaQuery.of(context).size.height,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: steps.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      color: Colors.red,
-                      height: 400,
-                      width: 350,
-                      child: Column(
-                        children: <Widget>[
-                          Text('Steps + ${steps[index].stepOrder} '),
-                          Text('Steps + ${steps[index].description} '),
-                          Row(
-                            children: <Widget>[
-                              RaisedButton(
-                                onPressed: () {
-                                  //call api
-                                },
-                                child: Text("start"),
-                              )
-                            ],
-                          )
-                        ],
+          : Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: scrollController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: steps.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.grey,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Steps  ${steps[index].stepOrder} '),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Steps + ${steps[index].description} ',
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                            index == 0
+                                ? RaisedButton(
+                                    onPressed: () {
+                                      RestDatasourceP().trainingRegisterApi(
+                                        dogId: currentDog.idDog,
+                                        idLesson: steps[index].idLesson,
+                                      );
+
+                                      scrollController.jumpTo(
+                                          MediaQuery.of(context).size.width *
+                                                  0.95 +
+                                              16);
+                                    },
+                                    child: Text("Start"),
+                                  )
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      RaisedButton(
+                                        onPressed: () {
+                                          scrollController.jumpTo((index - 1) *
+                                                  MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.95 +
+                                              16 * (index - 1));
+                                        },
+                                        child: Text("Previous"),
+                                      ),
+                                      index == steps.length - 1
+                                          ? RaisedButton(
+                                              onPressed: () {
+                                                RestDatasourceP()
+                                                    .trainingCompleteApi(
+                                                  idTraining: widget.id,
+                                                  dogId: currentDog.idDog,
+                                                  idLesson:
+                                                      steps[index].idLesson,
+                                                );
+                                              },
+                                              child: Text("Complete"),
+                                            )
+                                          : RaisedButton(
+                                              onPressed: () {
+                                                scrollController.jumpTo((index +
+                                                            1) *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.95 +
+                                                    16 * (index + 1));
+                                              },
+                                              child: Text("Next"),
+                                            )
+                                    ],
+                                  )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
     );
@@ -153,6 +230,20 @@ class _StepScreenState extends State<StepScreen> {
     for (var item in res["message"]) {
       StepsModel stepModel = StepsModel.fromJson(item);
       steps.add(stepModel);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  void getTrainings() async {
+    setState(() {
+      isLoading = true;
+    });
+    Map res = await RestDatasourceGet().getTrainingApi();
+    for (var item in res["message"]) {
+      TrainingModel trainingModel = TrainingModel.fromJson(item);
+      trainings.add(trainingModel);
     }
     setState(() {
       isLoading = false;

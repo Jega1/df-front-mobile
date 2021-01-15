@@ -206,9 +206,8 @@ class _AddVaccinState extends State<AddVaccin> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       gradient: LinearGradient(colors: [
-                        // Color.fromRGBO(143, 148,251,.1),
-                        Color.fromRGBO(0, 191, 255, .6),
-                        Color.fromRGBO(0, 191, 255, .9),
+                        Color.fromRGBO(232, 120, 51, .9),
+                        Color.fromRGBO(0, 77, 79, .7),
                       ])),
                   child: FlatButton(
                       padding: EdgeInsets.only(
