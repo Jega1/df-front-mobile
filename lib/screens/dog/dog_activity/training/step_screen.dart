@@ -243,6 +243,7 @@ class _StepScreenState extends State<StepScreen> {
     Map res = await RestDatasourceGet().getTrainingApi();
     for (var item in res["message"]) {
       TrainingModel trainingModel = TrainingModel.fromJson(item);
+
       trainings.add(trainingModel);
     }
     setState(() {
