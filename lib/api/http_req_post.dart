@@ -168,6 +168,7 @@ class RestDatasourceP {
 
   Future takeAppointApi({Map data}) async {
     String url = baseurl + "vet/take-appoint";
+    print(url);
     http.Response response = await http.post(url,
         body: jsonEncode(data),
         headers: {HttpHeaders.contentTypeHeader: "application/json"});
