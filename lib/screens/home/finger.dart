@@ -124,29 +124,31 @@ class _FingerAuthPageState extends State<FingerAuthPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(90),
-                child: GestureDetector(
-                  onTap: () {
-                    _authenticate();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                      Color.fromRGBO(232, 120, 51, .9),
-                      Color.fromRGBO(0, 77, 79, .7),
-                    ])),
-                    child: Icon(
-                      Icons.fingerprint,
-                      size: 70,
-                      color: Colors.white,
+            SharedPrefData().userId == -1
+                ? SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(90),
+                      child: GestureDetector(
+                        onTap: () {
+                          _authenticate();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                            Color.fromRGBO(232, 120, 51, .9),
+                            Color.fromRGBO(0, 77, 79, .7),
+                          ])),
+                          child: Icon(
+                            Icons.fingerprint,
+                            size: 70,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
           ],
         ),
       ],

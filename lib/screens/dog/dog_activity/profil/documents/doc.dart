@@ -24,7 +24,7 @@ class _DocScreenState extends State<DocScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('add a document'),
+        title: Text('Ajouter a document'),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.push(
@@ -39,7 +39,7 @@ class _DocScreenState extends State<DocScreen> {
             )
           : allImages.length == 0
               ? Center(
-                  child: Text('Error:'),
+                  child: Text('Ajouter un documents:'),
                 )
               : Container(
                   child: buildGridView(),

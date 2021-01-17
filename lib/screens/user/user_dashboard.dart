@@ -166,72 +166,6 @@ class _UserDashboardState extends State<UserDashboard> {
           ),
         ),
       ),
-
-      /*
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: lightGrey,
-        currentIndex: 0, // this will be set when a new tab is tapped
-        onTap: (int index) {
-          if (index == 0) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DogListScreen(),
-                ));
-          } else {
-            index == 1
-                ? Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VetListScreen(),
-                    ),
-                  )
-                : Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AppointListScreen(),
-                    ));
-          }
-          ;
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(
-              FontAwesomeIcons.paw,
-              color: lightBlack,
-              size: 30,
-            ),
-            title: new Text(
-              'Mes chiens',
-              style: TextStyle(color: lightBlack, fontSize: 20),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(
-              FontAwesomeIcons.hospitalUser,
-              color: lightBlack,
-              size: 30,
-            ),
-            title: new Text(
-              'Mes vetos',
-              style: TextStyle(color: lightBlack, fontSize: 20),
-            ),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                FontAwesomeIcons.appStoreIos,
-                color: lightBlack,
-                size: 30,
-              ),
-              title: Text(
-                'Mes rdv',
-                style: TextStyle(color: lightBlack, fontSize: 20),
-              ))
-        ],
-      ),
-
-
-      */
     );
   }
 
@@ -292,6 +226,37 @@ class _UserDashboardState extends State<UserDashboard> {
                     ),
                     Text(
                       'Profil',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              // value: 'Delete',
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserEdit(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.delete_sweep,
+                      size: 25,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Delete my profil',
                       style: TextStyle(
                         fontSize: 20,
                       ),

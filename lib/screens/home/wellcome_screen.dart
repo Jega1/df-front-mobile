@@ -23,20 +23,20 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      height: 200,
+      height: MediaQuery.of(context).size.height,
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: new AssetImage('assets/app.png'),
-          fit: BoxFit.fill,
+          image: new AssetImage('assets/logo-dog-face.png'),
+          fit: BoxFit.contain,
         ),
-        color: white,
+        color: secondColor,
         boxShadow: [
           BoxShadow(color: lightBlack, blurRadius: 5, offset: Offset(0, 1))
         ],
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Text('Splash screen ici wellcome screen'),
+      child: Center(child: Text('Splash screen ici wellcome screen')),
     ));
   }
 

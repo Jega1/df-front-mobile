@@ -1,6 +1,9 @@
+import 'package:dog_face/api/http_req_get.dart';
 import 'package:dog_face/datas/sharedPref.dart';
+import 'package:dog_face/models/appointment.dart';
 import 'package:dog_face/screens/appoint/list_appoint.dart';
 import 'package:dog_face/screens/home/finger.dart';
+import 'package:dog_face/screens/veterinary/vet_dashboard/medical_info.dart';
 
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_appointments.dart';
 import 'package:dog_face/screens/veterinary/vet_dashboard/vet_edit.dart';
@@ -25,7 +28,17 @@ class VetDashboardScreen extends StatefulWidget {
 }
 
 class _VetDashboardScreenState extends State<VetDashboardScreen> {
+  bool isLoading = false;
+  List vets = [];
+  List<AppointModel> allAppointOfVet = [];
+  //List<UserModel> users = [];
+
   int _currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,54 +46,33 @@ class _VetDashboardScreenState extends State<VetDashboardScreen> {
         title: Text('Veterinaire dashboard'),
         actions: <Widget>[signOut()],
       ),
-      body: Center(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.of(context)
-      //         .push(MaterialPageRoute(builder: (_) => AppointVetScreen()));
-      //   },
-      //   child: Icon(Icons.add),
-      //   //  backgroundColor: primaryColor,
-      // ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // this will be set when a new tab is tapped
-        onTap: (int index) {
-          if (index == 0) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AppointVetScreen(),
-                ));
-          } else {
-            index == 1
-                ? Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VetListScreen(),
-                    ),
-                  )
-                : Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AppointListScreen(),
-                    ),
-                  );
-          }
-          ;
+      body: ListView.builder(
+        itemCount: allAppointOfVet.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          MedicalInfo(appointModel: allAppointOfVet[index])));
+            },
+            child: ListTile(
+              title: Text(allAppointOfVet[index].firstname),
+              //trailing: ,
+              subtitle: Column(
+                children: <Widget>[
+                  Text(allAppointOfVet[index].username == null
+                      ? ""
+                      : allAppointOfVet[index].username),
+                  //  Text(allAppointOfVet[index]. == null
+                  // ? ""
+                  // : allAppointOfVet[index].username),
+                ],
+              ),
+            ),
+          );
         },
-
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.add_alarm),
-            title: new Text('Les rdv'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Historique rdv'),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text('Profile'))
-        ],
       ),
     );
   }
@@ -150,7 +142,57 @@ class _VetDashboardScreenState extends State<VetDashboardScreen> {
                 ),
               ),
             ),
+            PopupMenuItem(
+              // value: 'Delete',
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VetEdit(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.edit,
+                      size: 25,
+                      color: Colors.blue,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Delete',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ];
         });
+  }
+
+  void getData() async {
+    setState(() {
+      isLoading = true;
+    });
+    await RestDatasourceGet()
+        .getAppointsByVet(id: SharedPrefData().userId)
+        .then((val) {
+      Map res = val;
+
+      for (var item in res["data"]) {
+        allAppointOfVet.add(AppointModel.fromJson(item));
+      }
+      print(allAppointOfVet.first.idDog);
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 }

@@ -98,7 +98,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
+          actionBarColor: "#F58524",
           actionBarTitle: "Example App",
           allViewTitle: "All Photos",
           useDetailsView: false,

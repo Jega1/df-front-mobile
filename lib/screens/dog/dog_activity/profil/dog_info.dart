@@ -21,6 +21,8 @@ class DogInfoScreen extends StatefulWidget {
 
 class _DogInfoScreenState extends State<DogInfoScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final SnackBar snackBar =
+      const SnackBar(content: Text("Profil de +++++++++deleted"));
   File selectedImage;
 
   @override
@@ -31,164 +33,152 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
         title: Text(
           "Profil : " + currentDog.firstname,
         ),
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.delete_sweep),
+            tooltip: 'Show Snackbar',
             onPressed: () {
-              Navigator.pop(context);
-            }),
-      ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-              child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                    color: lightGrey,
-                    child: selectedImage == null
-                        ? currentDog.img != null && currentDog.img.length != 0
-                            ? Container(
-                                width: double.infinity,
-                                child: Image(
-                                  image: NetworkImage(
-                                      currentDog.img[0]["dog_image"]),
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : Text("No  image")
-                        : Container(
-                            width: double.infinity,
-                            child: Image(
-                              image: FileImage(selectedImage),
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-              ),
-              Expanded(
-                child: Container(
-                  color: primaryColor.withOpacity(0.6),
-                ),
-              )
-            ],
-          )),
-          Container(
-            //  margin: EdgeInsets.only(top: 50),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Column(
-                children: <Widget>[
-                  Hero(tag: 1, child: Image.asset('assets/logo.jpg')),
-                  GestureDetector(
-                    onTap: () {
-                      showSelectionDialog(
-                          context: context,
-                          function: () {
-                            setState(() {});
-                          },
-                          //  index: imageIndex,
-                          getImage: () async {
-                            PickedFile file = await getImageFromCamera();
-                            selectedImage = File(file.path);
-                            RestDatasourceP().uplodeImage(
-                              image: selectedImage,
-                              id: currentDog.idDog,
-                            );
-                            setState(() {});
-                          },
-                          getImageFromGallery: () async {
-                            PickedFile file = await imageFromGallery();
-                            selectedImage = File(file.path);
-                            print(selectedImage.path);
-                            RestDatasourceP().uplodeImage(
-                              image: selectedImage,
-                              id: currentDog.idDog,
-                            );
-                            setState(() {});
-                          });
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 60,
-                      decoration: BoxDecoration(
-                          color: secondColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+              //delete function
+              _showDeleteDialog();
+              //  _scaffoldKey.currentState.showSnackBar(snackBar);
+            },
           ),
-          Align(
-            alignment: Alignment.center,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => EditDog(
-                          dogModel: currentDog,
-                        )));
-              },
-              child: Container(
-                height: 100,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: shadowList,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          IconButton(
+            icon: const Icon(Icons.navigate_next),
+            tooltip: 'Next page',
+            onPressed: () {},
+          ),
+        ],
+      ),
+
+      // leading: IconButton(
+      //     icon: Icon(Icons.arrow_back_ios),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     }),
+
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              //  margin: EdgeInsets.only(top: 50),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Column(
                   children: <Widget>[
-                    Text(
-                      currentDog.firstname,
-                      style: TextStyle(
-                        color: secondColor,
-                        fontSize: 30.0,
-                      ),
-                    ),
-                    Icon(
-                      Icons.edit,
-                      size: 30.0,
-                      color: secondColor,
-                    ),
+                    Hero(tag: 1, child: Image.asset('assets/logo.jpg')),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     showSelectionDialog(
+                    //         context: context,
+                    //         function: () {
+                    //           setState(() {});
+                    //         },
+                    //         //  index: imageIndex,
+                    //         getImage: () async {
+                    //           PickedFile file = await getImageFromCamera();
+                    //           selectedImage = File(file.path);
+                    //           RestDatasourceP().uplodeImage(
+                    //             image: selectedImage,
+                    //             id: currentDog.idDog,
+                    //           );
+                    //           setState(() {});
+                    //         },
+                    //         getImageFromGallery: () async {
+                    //           PickedFile file = await imageFromGallery();
+                    //           selectedImage = File(file.path);
+                    //           print(selectedImage.path);
+                    //           RestDatasourceP().uplodeImage(
+                    //             image: selectedImage,
+                    //             id: currentDog.idDog,
+                    //           );
+                    //           setState(() {});
+                    //         });
+                    //   },
+                    //   child: Container(
+                    //     height: 50,
+                    //     width: 60,
+                    //     decoration: BoxDecoration(
+                    //         color: secondColor,
+                    //         borderRadius: BorderRadius.circular(20)),
+                    //     child: Icon(
+                    //       Icons.camera_alt,
+                    //       color: Colors.white,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              height: 200,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  )),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      currentDog.firstname,
-                      style: TextStyle(color: secondColor, fontSize: 18),
-                    ),
+            Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => EditDog(
+                            dogModel: currentDog,
+                          )));
+                },
+                child: Container(
+                  height: 100,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: shadowList,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(
+                        currentDog.firstname,
+                        style: TextStyle(
+                          color: secondColor,
+                          fontSize: 30.0,
+                        ),
+                      ),
+                      Icon(
+                        Icons.edit,
+                        size: 30.0,
+                        color: secondColor,
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(currentDog.birthCertificateNu),
-                  ),
-                ],
+                ),
               ),
             ),
-          )
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    )),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        currentDog.firstname,
+                        style: TextStyle(color: secondColor, fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(currentDog.birthCertificateNu),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: lightGrey,
@@ -251,6 +241,39 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showDeleteDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('voulais-vous supprimer?'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('vous allez perdu tous las information de votre chien'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text('OUI'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            RaisedButton(
+              child: Text('NON'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
