@@ -71,83 +71,82 @@ class _DogListScreenState extends State<DogListScreen> {
       //                   return dogListCont(dogs[index]);
       //                 },
       //               ),
-      //     floatingActionButton: FloatingActionButton(
-      //       onPressed: () {
-      //         Navigator.of(context)
-      //             .push(MaterialPageRoute(builder: (_) => DogAddScreen()))
-      //             .whenComplete(() {
-      //           getData();
-      //         });
-      //       },
-      //       child: Icon(Icons.add),
-      //       backgroundColor: primaryColor,
-      //     ),
-      //   );
-      // }
-
-      // Container dogListCont(
-      //   DogModel item,
-      // ) {
-      //   return Container(
-      //     height: 240,
-      //     margin: EdgeInsets.symmetric(horizontal: 20),
-      //     child: GestureDetector(
-      //       onTap: () {
-      //         setState(() {
-      //           currentDog = item;
-      //         });
-
-      //         Navigator.of(context)
-      //             .push(MaterialPageRoute(builder: (_) => DogInfoScreen()))
-      //             .then((val) {
-      //           getData();
-      //         });
-      //       },
-      //       child: Row(
-      //         children: [
-      //           Expanded(
-      //             child: Stack(
-      //               children: [
-      //                 Container(
-      //                   decoration: BoxDecoration(
-      //                     // color: secondColor,
-      //                     borderRadius: BorderRadius.circular(20),
-      //                     boxShadow: shadowList,
-      //                     image: DecorationImage(
-      //                       fit: BoxFit.cover,
-      //                       image: item.img.length != 0
-      //                           ? NetworkImage(
-      //                               item.img[0]["dog_image"],
-      //                             )
-      //                           : AssetImage('assets/sh.png'),
-      //                     ),
-      //                   ),
-      //                   margin: EdgeInsets.only(top: 50),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //           Expanded(
-      //               child: Container(
-      //             margin: EdgeInsets.only(top: 60, bottom: 20),
-      //             decoration: BoxDecoration(
-      //                 color: Colors.white,
-      //                 boxShadow: shadowList,
-      //                 borderRadius: BorderRadius.only(
-      //                     topRight: Radius.circular(20),
-      //                     bottomRight: Radius.circular(20))),
-      //             child: Column(
-      //               children: <Widget>[
-      //                 Text(item.firstname),
-      //                 Text(item.lastname),
-      //                 Text(item.race),
-      //               ],
-      //             ),
-      //           ))
-      //         ],
-      //       ),
-      //     ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => DogAddScreen()))
+              .whenComplete(() {
+            getData();
+          });
+        },
+        child: Icon(Icons.add),
+        backgroundColor: primaryColor,
+      ),
     );
+    // }
+
+    // Container dogListCont(
+    //   DogModel item,
+    // ) {
+    //   return Container(
+    //     height: 240,
+    //     margin: EdgeInsets.symmetric(horizontal: 20),
+    //     child: GestureDetector(
+    //       onTap: () {
+    //         setState(() {
+    //           currentDog = item;
+    //         });
+
+    //         Navigator.of(context)
+    //             .push(MaterialPageRoute(builder: (_) => DogInfoScreen()))
+    //             .then((val) {
+    //           getData();
+    //         });
+    //       },
+    //       child: Row(
+    //         children: [
+    //           Expanded(
+    //             child: Stack(
+    //               children: [
+    //                 Container(
+    //                   decoration: BoxDecoration(
+    //                     // color: secondColor,
+    //                     borderRadius: BorderRadius.circular(20),
+    //                     boxShadow: shadowList,
+    //                     image: DecorationImage(
+    //                       fit: BoxFit.cover,
+    //                       image: item.img.length != 0
+    //                           ? NetworkImage(
+    //                               item.img[0]["dog_image"],
+    //                             )
+    //                           : AssetImage('assets/sh.png'),
+    //                     ),
+    //                   ),
+    //                   margin: EdgeInsets.only(top: 50),
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //           Expanded(
+    //               child: Container(
+    //             margin: EdgeInsets.only(top: 60, bottom: 20),
+    //             decoration: BoxDecoration(
+    //                 color: Colors.white,
+    //                 boxShadow: shadowList,
+    //                 borderRadius: BorderRadius.only(
+    //                     topRight: Radius.circular(20),
+    //                     bottomRight: Radius.circular(20))),
+    //             child: Column(
+    //               children: <Widget>[
+    //                 Text(item.firstname),
+    //                 Text(item.lastname),
+    //                 Text(item.race),
+    //               ],
+    //             ),
+    //           ))
+    //         ],
+    //       ),
+    //     ),
   }
 
   void getData() async {
