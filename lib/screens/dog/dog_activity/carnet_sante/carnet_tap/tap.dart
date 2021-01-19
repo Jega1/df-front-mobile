@@ -30,7 +30,7 @@ class _TapScreenState extends State<TapScreen> {
                     new Icon(
                       FontAwesomeIcons.syringe,
                       color: white,
-                      size: 30,
+                      size: 23,
                     ),
                     Text('Vaccin')
                   ],
@@ -42,7 +42,7 @@ class _TapScreenState extends State<TapScreen> {
                     new Icon(
                       FontAwesomeIcons.stethoscope,
                       color: white,
-                      size: 30,
+                      size: 23,
                     ),
                     Text('Traitement')
                   ],

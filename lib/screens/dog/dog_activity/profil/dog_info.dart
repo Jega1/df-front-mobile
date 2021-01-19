@@ -261,7 +261,8 @@ class _DogInfoScreenState extends State<DogInfoScreen> {
           actions: <Widget>[
             RaisedButton(
               child: Text('OUI'),
-              onPressed: () {
+              onPressed: () async {
+                await RestDatasourceP().dogDeleteApi(id: currentDog.idDog);
                 Navigator.of(context).pop();
               },
             ),

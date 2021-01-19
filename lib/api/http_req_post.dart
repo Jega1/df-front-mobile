@@ -9,9 +9,9 @@ import 'package:dog_face/models/user.dart';
 
 import 'package:http/http.dart' as http;
 
-String baseurl = "http://10.0.2.2:8000/api/";
+//String baseurl = "http://10.0.2.2:8000/api/";
 //String baseurl = "http://51.38.51.35:8000/api/";
-//String baseurl = "https://dogface-backend.herokuapp.com/api/";
+String baseurl = "https://dog-face-back.herokuapp.com/api/";
 //String baseurl = "https://facedog.herokuapp.com/api/";
 
 class RestDatasourceP {
@@ -30,7 +30,7 @@ class RestDatasourceP {
       "email": userModel.email,
       "password": userModel.password,
       "address": userModel.address,
-      "codePostal": userModel.codePostal,
+      "code_postal": userModel.codePostal,
       "ville": userModel.ville,
       "telephone": userModel.telephone,
       "longitude": userModel.longitude,
@@ -114,8 +114,16 @@ class RestDatasourceP {
 
   dogDeleteApi({int id}) async {
     String url = baseurl + "dog/delete/${id}";
-    http.Response response = await http
-        .get(url, headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    http.Response response = await http.delete(url,
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
+    Map res = jsonDecode(response.body);
+    print(res);
+  }
+
+  userDeleteApi({int id}) async {
+    String url = baseurl + "user/delete/${id}";
+    http.Response response = await http.delete(url,
+        headers: {HttpHeaders.contentTypeHeader: "application/json"});
     Map res = jsonDecode(response.body);
     print(res);
   }

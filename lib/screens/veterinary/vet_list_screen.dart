@@ -104,7 +104,8 @@ class _VetListScreenState extends State<VetListScreen> {
       isLoading = true;
     });
     Map res = await RestDatasourceGet().getAllVetApi();
-    allvet = res["data"];
+    allvet = res["data"] ?? [];
+
     setState(() {
       isLoading = false;
     });

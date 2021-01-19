@@ -69,7 +69,7 @@ class _EditDogState extends State<EditDog> {
     // getData();
     _selectedSex = widget.dogModel.sex;
     raceCtl.text = widget.dogModel.race;
-    //  firstnameCtl = currentDog.firstname;
+
     firstnameCtl.text = widget.dogModel.firstname;
     lastnameCtl.text = widget.dogModel.lastname;
     firstnameCtl.text = widget.dogModel.firstname;
@@ -118,24 +118,17 @@ class _EditDogState extends State<EditDog> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              initialValue: currentDog.lastname,
-              onSaved: (val) {
-                currentDog.lastname = val;
-              },
-              decoration: InputDecoration(
-                  //  labelText: "lastname",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0))),
-              //controller:,
-            ),
+                decoration: InputDecoration(
+                    labelText: "lastname",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+                controller: lastnameCtl),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              //  validator: requiredValidator,
-
               decoration: InputDecoration(
-                  // labelText: "Race",
+                  labelText: "Race",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
               controller: raceCtl,
@@ -245,18 +238,13 @@ class _EditDogState extends State<EditDog> {
                   padding:
                       EdgeInsets.only(left: 50, top: 10, right: 50, bottom: 10),
                   onPressed: () {
-                    // if (_formKey.currentState.validate()) {
-                    //   _formKey.currentState.save();
-                    //   dogModel.birthDate = birthDateCtl.text;
-                    //   dogModel.sex = _selectedSex;
-                    //      id_user= SharedPrefData().userId
                     print(dogModel.lastname);
                     widget.dogModel.firstname = firstnameCtl.text;
-
                     widget.dogModel.lastname = lastnameCtl.text;
                     widget.dogModel.sex = _selectedSex;
                     widget.dogModel.race = raceCtl.text;
                     widget.dogModel.birthDate = birthDateCtl.text;
+                    widget.dogModel.puceNu = puceNuCtl.text;
                     widget.dogModel.birthCertificateNu =
                         birthCertificateNuCtl.text;
                     widget.dogModel.passportNu = passportNuCtl.text;

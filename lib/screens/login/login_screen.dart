@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   UserModel userModel = UserModel();
+  bool isLoading = false;
   final requiredValidator =
       RequiredValidator(errorText: 'This field is required');
   final _formKey = GlobalKey<FormState>();
@@ -28,30 +29,34 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         key: scaffoldKey,
-        body: Stack(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: const Radius.circular(30),
-                      bottomRight: const Radius.circular(30),
+        body: isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Stack(
+                children: <Widget>[
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.of(context).size.width,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: const Radius.circular(30),
+                            bottomRight: const Radius.circular(30),
+                          ),
+                          gradient: LinearGradient(colors: [
+                            Color.fromRGBO(232, 120, 51, .9),
+                            Color.fromRGBO(0, 77, 79, .7),
+                          ])),
                     ),
-                    gradient: LinearGradient(colors: [
-                      Color.fromRGBO(232, 120, 51, .9),
-                      Color.fromRGBO(0, 77, 79, .7),
-                    ])),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [_logo(), buildContainer()],
+                  )
+                ],
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [_logo(), buildContainer()],
-            )
-          ],
-        ),
       ),
     );
   }
@@ -182,8 +187,13 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: () async {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-
-                authUser(userModel: userModel, context: context);
+                setState(() {
+                  isLoading = true;
+                });
+                await authUser(userModel: userModel, context: context);
+                setState(() {
+                  isLoading = false;
+                });
               }
             },
             child: Text(

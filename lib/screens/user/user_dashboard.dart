@@ -1,5 +1,7 @@
+import 'package:dog_face/api/http_req_post.dart';
 import 'package:dog_face/appColors.dart';
 import 'package:dog_face/datas/sharedPref.dart';
+import 'package:dog_face/main.dart';
 import 'package:dog_face/screens/appoint/list_appoint.dart';
 import 'package:dog_face/screens/dog/dog_activity/profil/dog_list_screen.dart';
 import 'package:dog_face/screens/home/finger.dart';
@@ -238,12 +240,13 @@ class _UserDashboardState extends State<UserDashboard> {
               // value: 'Delete',
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserEdit(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => UserEdit(),
+                  //   ),
+                  // );
+                  RestDatasourceP().userDeleteApi(id: SharedPrefData().userId);
                 },
                 child: Row(
                   children: <Widget>[

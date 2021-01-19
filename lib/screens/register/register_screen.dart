@@ -142,6 +142,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+
                     onSaved: (val) {
                       userModel.telephone = int.parse(val);
                     },
@@ -175,6 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     validator: requiredValidator,
                     onSaved: (val) {
                       userModel.codePostal = val;

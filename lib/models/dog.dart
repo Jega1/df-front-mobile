@@ -49,7 +49,7 @@ class DogModel {
         "lastname": lastname,
         "sex": sex,
         "race": race,
-        "puceNu": puceNu,
+        "puce_nu": puceNu,
         "birth_date": birthDate,
         "birth_certificate_nu": birthCertificateNu,
         "passport_nu": passportNu,

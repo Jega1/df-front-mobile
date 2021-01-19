@@ -66,7 +66,7 @@ class _AppointListScreenState extends State<AppointListScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                allConsult[index]["race"].toString(),
+                                allConsult[index]["username"].toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black,
